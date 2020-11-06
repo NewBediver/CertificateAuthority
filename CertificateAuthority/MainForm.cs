@@ -1,14 +1,5 @@
-﻿using HashCryptography;
-using HashCryptography.Implementation;
-
+﻿using CertificateAuthority.HashForms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CertificateAuthority
@@ -20,11 +11,35 @@ namespace CertificateAuthority
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void GOST34112018256bitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HashFunction hash = new HashFunction(new GOST34112018Policy512bit());
-
-            TBox2.Text = BitConverter.ToString(hash.GetHash(TBox1.Text));
+            if (m_Hash256bitForm == null || m_Hash256bitForm.IsDisposed)
+            {
+                m_Hash256bitForm = new GOST34112018256bitForm();
+                m_Hash256bitForm.Show();
+            }
+            else
+            {
+                m_Hash256bitForm.WindowState = FormWindowState.Normal;
+                m_Hash256bitForm.Focus();
+            }
         }
+
+        private void GOST34112018512bitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m_Hash512bitForm == null || m_Hash512bitForm.IsDisposed)
+            {
+                m_Hash512bitForm = new GOST34112018512bitForm();
+                m_Hash512bitForm.Show();
+            }
+            else
+            {
+                m_Hash512bitForm.WindowState = FormWindowState.Normal;
+                m_Hash512bitForm.Focus();
+            }
+        }
+
+        private GOST34112018256bitForm m_Hash256bitForm;
+        private GOST34112018512bitForm m_Hash512bitForm;
     }
 }

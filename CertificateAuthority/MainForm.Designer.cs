@@ -28,57 +28,91 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TBox1 = new System.Windows.Forms.RichTextBox();
-            this.TBox2 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.MainMenu = new System.Windows.Forms.MenuStrip();
+            this.HashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GOST34112018ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GOST34112018256bitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GOST34112018512bitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // TBox1
+            // MainMenu
             // 
-            this.TBox1.Location = new System.Drawing.Point(12, 12);
-            this.TBox1.Name = "TBox1";
-            this.TBox1.Size = new System.Drawing.Size(723, 210);
-            this.TBox1.TabIndex = 0;
-            this.TBox1.Text = "";
+            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.HashToolStripMenuItem});
+            this.MainMenu.Location = new System.Drawing.Point(0, 0);
+            this.MainMenu.Name = "MainMenu";
+            this.MainMenu.Size = new System.Drawing.Size(784, 24);
+            this.MainMenu.TabIndex = 3;
             // 
-            // TBox2
+            // HashToolStripMenuItem
             // 
-            this.TBox2.Location = new System.Drawing.Point(12, 243);
-            this.TBox2.Name = "TBox2";
-            this.TBox2.Size = new System.Drawing.Size(723, 106);
-            this.TBox2.TabIndex = 1;
-            this.TBox2.Text = "";
+            this.HashToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.GOST34112018ToolStripMenuItem});
+            this.HashToolStripMenuItem.Name = "HashToolStripMenuItem";
+            this.HashToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.HashToolStripMenuItem.Text = "Hash";
             // 
-            // button1
+            // GOST34112018ToolStripMenuItem
             // 
-            this.button1.Location = new System.Drawing.Point(316, 389);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.GOST34112018ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.GOST34112018256bitToolStripMenuItem,
+            this.GOST34112018512bitToolStripMenuItem});
+            this.GOST34112018ToolStripMenuItem.Name = "GOST34112018ToolStripMenuItem";
+            this.GOST34112018ToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.GOST34112018ToolStripMenuItem.Text = "GOST 34.11-2018";
+            // 
+            // GOST34112018256bitToolStripMenuItem
+            // 
+            this.GOST34112018256bitToolStripMenuItem.Name = "GOST34112018256bitToolStripMenuItem";
+            this.GOST34112018256bitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.GOST34112018256bitToolStripMenuItem.Text = "256 bits";
+            this.GOST34112018256bitToolStripMenuItem.ToolTipText = "GOST 34.11-2018 \"Stribog\" hash function with 256-bit length hash-sum";
+            this.GOST34112018256bitToolStripMenuItem.Click += new System.EventHandler(this.GOST34112018256bitToolStripMenuItem_Click);
+            // 
+            // GOST34112018512bitToolStripMenuItem
+            // 
+            this.GOST34112018512bitToolStripMenuItem.Name = "GOST34112018512bitToolStripMenuItem";
+            this.GOST34112018512bitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.GOST34112018512bitToolStripMenuItem.Text = "512 bits";
+            this.GOST34112018512bitToolStripMenuItem.ToolTipText = "GOST 34.11-2018 \"Stribog\" hash function with 512-bit length hash-sum";
+            this.GOST34112018512bitToolStripMenuItem.Click += new System.EventHandler(this.GOST34112018512bitToolStripMenuItem_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(210, 93);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 15);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Main Window";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.TBox2);
-            this.Controls.Add(this.TBox1);
+            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.MainMenu);
+            this.MainMenuStrip = this.MainMenu;
             this.Name = "MainWindow";
             this.Text = "Certification Authority";
+            this.MainMenu.ResumeLayout(false);
+            this.MainMenu.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.RichTextBox TBox1;
-        private System.Windows.Forms.RichTextBox TBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.MenuStrip MainMenu;
+        private System.Windows.Forms.ToolStripMenuItem HashToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GOST34112018ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GOST34112018256bitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GOST34112018512bitToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
     }
 }
 

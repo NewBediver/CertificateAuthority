@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HashCryptography
 {
@@ -27,9 +25,9 @@ namespace HashCryptography
             Policy = policy;
         }
 
-        public byte[] GetHash(string message)
+        public byte[] GetHash(byte[] message)
         {
-            return Policy.GetHash(Encoding.ASCII.GetBytes(message));
+            return Policy.GetHash(message);
         }
 
         private IHashPolicy m_Policy;

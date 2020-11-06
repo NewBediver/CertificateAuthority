@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace HashCryptography
+﻿namespace HashCryptography
 {
     public interface IHashPolicy
     {
