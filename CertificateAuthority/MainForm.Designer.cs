@@ -33,6 +33,10 @@
             this.GOST34112018ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GOST34112018256bitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GOST34112018512bitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DigitalSignatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GOST34102018ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GOST34102018256bitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GOST34102018512bitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -40,7 +44,8 @@
             // MainMenu
             // 
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.HashToolStripMenuItem});
+            this.HashToolStripMenuItem,
+            this.DigitalSignatureToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(784, 24);
@@ -79,6 +84,38 @@
             this.GOST34112018512bitToolStripMenuItem.ToolTipText = "GOST 34.11-2018 \"Stribog\" hash function with 512-bit length hash-sum";
             this.GOST34112018512bitToolStripMenuItem.Click += new System.EventHandler(this.GOST34112018512bitToolStripMenuItem_Click);
             // 
+            // DigitalSignatureToolStripMenuItem
+            // 
+            this.DigitalSignatureToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.GOST34102018ToolStripMenuItem});
+            this.DigitalSignatureToolStripMenuItem.Name = "DigitalSignatureToolStripMenuItem";
+            this.DigitalSignatureToolStripMenuItem.Size = new System.Drawing.Size(106, 20);
+            this.DigitalSignatureToolStripMenuItem.Text = "Digital Signature";
+            // 
+            // GOST34102018ToolStripMenuItem
+            // 
+            this.GOST34102018ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.GOST34102018256bitToolStripMenuItem,
+            this.GOST34102018512bitToolStripMenuItem});
+            this.GOST34102018ToolStripMenuItem.Name = "GOST34102018ToolStripMenuItem";
+            this.GOST34102018ToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.GOST34102018ToolStripMenuItem.Text = "GOST 34.10-2018";
+            // 
+            // GOST34102018256bitToolStripMenuItem
+            // 
+            this.GOST34102018256bitToolStripMenuItem.Name = "GOST34102018256bitToolStripMenuItem";
+            this.GOST34102018256bitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.GOST34102018256bitToolStripMenuItem.Text = "256 bits";
+            this.GOST34102018256bitToolStripMenuItem.ToolTipText = "Calculate and verify digital signature with GOST 34.10-2018 algorithm 256 bit";
+            this.GOST34102018256bitToolStripMenuItem.Click += new System.EventHandler(this.GOST34102018256bitToolStripMenuItem_Click);
+            // 
+            // GOST34102018512bitToolStripMenuItem
+            // 
+            this.GOST34102018512bitToolStripMenuItem.Name = "GOST34102018512bitToolStripMenuItem";
+            this.GOST34102018512bitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.GOST34102018512bitToolStripMenuItem.Text = "512 bits";
+            this.GOST34102018512bitToolStripMenuItem.ToolTipText = "Calculate and verify digital signature with GOST 34.10-2018 algorithm 512 bit";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -113,6 +150,10 @@
         private System.Windows.Forms.ToolStripMenuItem GOST34112018256bitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GOST34112018512bitToolStripMenuItem;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem DigitalSignatureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GOST34102018ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GOST34102018256bitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GOST34102018512bitToolStripMenuItem;
     }
 }
 

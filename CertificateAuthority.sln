@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CertificateAuthority", "CertificateAuthority\CertificateAuthority.csproj", "{29967652-6B75-4F40-AB34-A59FB94DD41B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsymmetricCryptography", "AsymmetricCryptography\AsymmetricCryptography.csproj", "{15E6CCB8-D5D7-4B25-B6F4-9E78C331C293}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalSignature", "AsymmetricCryptography\DigitalSignature.csproj", "{15E6CCB8-D5D7-4B25-B6F4-9E78C331C293}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HashCryptography", "HashCryptography\HashCryptography.csproj", "{FC981953-C0EC-4463-AD53-9F859EE9771E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{929E86E7-9C9B-45A2-93DB-4C1C0C93196E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "TestProject\TestProject.csproj", "{929E86E7-9C9B-45A2-93DB-4C1C0C93196E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
