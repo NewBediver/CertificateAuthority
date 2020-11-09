@@ -21,6 +21,38 @@ namespace DigitalSignature.Implementations
             Q = new BigInteger(1, parameters.Q);
         }
 
+        public byte[] GeneratePrivateKey(int seed)
+        {
+            var rng = new Random(seed);
+            byte[] bytes = new byte[32];
+
+            BigInteger d;
+            do
+            {
+                rng.NextBytes(bytes);
+                d = new BigInteger(1, bytes);
+            } while (d.CompareTo(BigInteger.Zero) <= 0 || d.CompareTo(Q) >= 0);
+            return d.ToByteArrayUnsigned();
+        }
+
+        public byte[] GeneratePublicKey(byte[] privateKey)
+        {
+            BigInteger d = new BigInteger(1, privateKey);
+            Point Q = Curve.Multiply(P, d);
+
+            string x = Q.X.ToString(16).PadLeft(64, '0');
+            string y = Q.Y.ToString(16).PadLeft(64, '0');
+            string total = x + y;
+
+            byte[] publicKey = new byte[total.Length / 2];
+            for (int i = 0; i < total.Length; i += 2)
+            {
+                publicKey[i / 2] = Convert.ToByte(total.Substring(i, 2), 16);
+            }
+
+            return publicKey;
+        }
+
         public byte[] CreateSignature(byte[] message, byte[] privateKey)
         {
             BigInteger d = new BigInteger(1, privateKey);

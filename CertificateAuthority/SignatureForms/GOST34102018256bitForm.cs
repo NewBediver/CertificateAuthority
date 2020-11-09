@@ -28,39 +28,26 @@ namespace CertificateAuthority.SignatureForms
                 return;
             }
 
-            DigitalSignature.DigitalSignature signature;
-            if (B256RadioButton.Checked)
+            try
             {
-                signature = new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetB256)));
-            }
-            else if (C256RadioButton.Checked)
-            {
-                signature = new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetC256)));
-            }
-            else if (D256RadioButton.Checked)
-            {
-                signature = new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetD256)));
-            }
-            else if (GOST34102018RadioButton.Checked)
-            {
-                signature = new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetGOST34102018256bit)));
-            }
-            else
-            {
-                return;
-            }
+                DigitalSignature.DigitalSignature signature = GetDigitalSignatureAlgo();
 
-            byte[] publicKey = StringToByte(PublicKeyTextBox.Text, 64);
-            byte[] sig = StringToByte(DigitalSignatureTextBox.Text, 64);
-            byte[] message = Encoding.Default.GetBytes(MessageTextBox.Text);
-            
-            if (signature.IsSignatureValid(message, sig, publicKey))
-            {
-                ResultRichTextBox.Text = "Signature is valid";
+                byte[] publicKey = StringToByte(PublicKeyTextBox.Text, 64);
+                byte[] sig = StringToByte(DigitalSignatureTextBox.Text, 64);
+                byte[] message = Encoding.Default.GetBytes(MessageTextBox.Text);
+
+                if (signature.IsSignatureValid(message, sig, publicKey))
+                {
+                    ResultRichTextBox.Text = "Signature is valid";
+                }
+                else
+                {
+                    ResultRichTextBox.Text = "Signature is invalid";
+                }
             }
-            else
+            catch (Exception exp)
             {
-                ResultRichTextBox.Text = "Signature is invalid";
+                ResultRichTextBox.Text = "Error occured while signature had been checking. " + exp.Message;
             }
         }
 
@@ -72,38 +59,66 @@ namespace CertificateAuthority.SignatureForms
                 return;
             }
 
-            DigitalSignature.DigitalSignature signature;
-            if (B256RadioButton.Checked)
+            try
             {
-                signature = new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetB256)));
-            }
-            else if (C256RadioButton.Checked)
-            {
-                signature = new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetC256)));
-            }
-            else if (D256RadioButton.Checked)
-            {
-                signature = new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetD256)));
-            }
-            else if (GOST34102018RadioButton.Checked)
-            {
-                signature = new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetGOST34102018256bit)));
-            }
-            else
-            {
-                return;
-            }
+                DigitalSignature.DigitalSignature signature = GetDigitalSignatureAlgo();
 
-            byte[] privateKey = StringToByte(PrivateKeyTextBox.Text, 32);
-            byte[] message = Encoding.Default.GetBytes(MessageTextBox.Text);
+                byte[] privateKey = StringToByte(PrivateKeyTextBox.Text, 32);
+                byte[] message = Encoding.Default.GetBytes(MessageTextBox.Text);
 
-            DigitalSignatureTextBox.Text = string.Join("", BitConverter.ToString(signature.CreateSignature(message, privateKey)).Split('-'));
-            ResultRichTextBox.Text = "Success";
+                DigitalSignatureTextBox.Text = string.Join("", BitConverter.ToString(signature.CreateSignature(message, privateKey)).Split('-'));
+                ResultRichTextBox.Text = "Success";
+            }
+            catch (Exception exp)
+            {
+                ResultRichTextBox.Text = "Error occured while signature had been calculating. " + exp.Message;
+            }
         }
 
         private void GenerateKeys_Click(object sender, EventArgs e)
         {
+            using (var form = new KeyGenerationForm())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    var signature = GetDigitalSignatureAlgo();
 
+                    var priv = signature.GeneratePrivateKey(form.Seed);
+                    var pub = signature.GeneratePublicKey(priv);
+
+                    PublicKeyTextBox.Text = string.Join("", BitConverter.ToString(pub).Split('-'));
+                    PrivateKeyTextBox.Text = string.Join("", BitConverter.ToString(priv).Split('-'));
+                }
+                else
+                {
+                    ResultRichTextBox.Text = "You closed the form too early!";
+                }
+            }
+        }
+
+        private DigitalSignature.DigitalSignature GetDigitalSignatureAlgo()
+        {
+            if (B256RadioButton.Checked)
+            {
+                return new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetB256)));
+            }
+            else if (C256RadioButton.Checked)
+            {
+                return new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetC256)));
+            }
+            else if (D256RadioButton.Checked)
+            {
+                return new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetD256)));
+            }
+            else if (GOST34102018RadioButton.Checked)
+            {
+                return new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetGOST34102018256bit)));
+            }
+            else
+            {
+                throw new Exception("Something wrong with parameters set!");
+            }
         }
 
         private byte[] StringToByte(string str, int len)
