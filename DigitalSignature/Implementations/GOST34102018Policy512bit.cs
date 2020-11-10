@@ -8,12 +8,12 @@ using System.Security.Cryptography;
 
 namespace DigitalSignature.Implementations
 {
-    public class GOST34102018Policy256bit
+    public class GOST34102018Policy512bit
         : IDigitalSignaturePolicy
     {
         public ParameterSet Parameters { get; }
 
-        public GOST34102018Policy256bit(ParameterSet parameters)
+        public GOST34102018Policy512bit(ParameterSet parameters)
         {
             Parameters = parameters;
             Curve = new Curve(parameters);
@@ -24,7 +24,7 @@ namespace DigitalSignature.Implementations
         public byte[] GeneratePrivateKey(int seed)
         {
             var rng = new Random(seed);
-            byte[] bytes = new byte[32];
+            byte[] bytes = new byte[64];
 
             BigInteger d;
             do
@@ -40,8 +40,8 @@ namespace DigitalSignature.Implementations
             BigInteger d = new BigInteger(1, privateKey);
             Point Q = Curve.Multiply(P, d);
 
-            string x = Q.X.ToString(16).PadLeft(64, '0');
-            string y = Q.Y.ToString(16).PadLeft(64, '0');
+            string x = Q.X.ToString(16).PadLeft(128, '0');
+            string y = Q.Y.ToString(16).PadLeft(128, '0');
             string total = x + y;
 
             byte[] publicKey = new byte[total.Length / 2];
@@ -58,7 +58,7 @@ namespace DigitalSignature.Implementations
             BigInteger d = new BigInteger(1, privateKey);
 
             // Stage 1
-            HashFunction func = new HashFunction(new GOST34112018Policy256bit());
+            HashFunction func = new HashFunction(new GOST34112018Policy512bit());
             byte[] h = func.GetHash(message);
 
             // Stage 2
@@ -79,7 +79,7 @@ namespace DigitalSignature.Implementations
                 do
                 {
                     var rng = new RNGCryptoServiceProvider();
-                    byte[] bytes = new byte[32];
+                    byte[] bytes = new byte[64];
                     rng.GetBytes(bytes);
                     k = new BigInteger(1, bytes);
                 }
@@ -93,10 +93,10 @@ namespace DigitalSignature.Implementations
                 s = r.Multiply(d).Add(k.Multiply(e)).Mod(Q);
             }
             while (r.Equals(BigInteger.Zero) || s.Equals(BigInteger.Zero));
-            
+
             // Stage 6
-            string Rvector = r.ToString(16).PadLeft(64, '0');
-            string Svector = s.ToString(16).PadLeft(64, '0');
+            string Rvector = r.ToString(16).PadLeft(128, '0');
+            string Svector = s.ToString(16).PadLeft(128, '0');
             string total = Rvector + Svector;
 
             byte[] ans = new byte[total.Length / 2];
@@ -110,7 +110,7 @@ namespace DigitalSignature.Implementations
 
         public bool IsSignatureValid(byte[] message, byte[] signature, byte[] publicKey)
         {
-            int len = 64;
+            int len = 128;
             if (signature.Length != len) return false;
 
             // Create Q
@@ -142,7 +142,7 @@ namespace DigitalSignature.Implementations
             }
 
             // Stage 2
-            HashFunction func = new HashFunction(new GOST34112018Policy256bit());
+            HashFunction func = new HashFunction(new GOST34112018Policy512bit());
             byte[] h = func.GetHash(message);
 
             // Stage 3

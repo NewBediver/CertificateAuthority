@@ -68,7 +68,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.HashBox.Location = new System.Drawing.Point(7, 23);
-            this.HashBox.Multiline = false;
             this.HashBox.Name = "HashBox";
             this.HashBox.ReadOnly = true;
             this.HashBox.Size = new System.Drawing.Size(743, 146);
@@ -104,7 +103,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.CalculateHash_Click);
             // 
-            // GOST34112018512bit
+            // GOST34112018512bitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -113,7 +112,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "GOST34112018512bit";
+            this.Name = "GOST34112018512bitForm";
             this.Text = "GOST 34.11-2018 512 bit";
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

@@ -54,24 +54,24 @@ namespace CertificateAuthority
             }
         }
 
-        /*private void GOST34102018512bitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GOST34102018512bitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (m_Hash512bitForm == null || m_Hash512bitForm.IsDisposed)
+            if (m_Sign512bitForm == null || m_Sign512bitForm.IsDisposed)
             {
-                m_Hash512bitForm = new GOST34112018512bitForm();
-                m_Hash512bitForm.Show();
+                m_Sign512bitForm = new GOST34102018512bitForm();
+                m_Sign512bitForm.Show();
             }
             else
             {
-                m_Hash512bitForm.WindowState = FormWindowState.Normal;
-                m_Hash512bitForm.Focus();
+                m_Sign512bitForm.WindowState = FormWindowState.Normal;
+                m_Sign512bitForm.Focus();
             }
-        }*/
+        }
 
         private GOST34112018256bitForm m_Hash256bitForm;
         private GOST34112018512bitForm m_Hash512bitForm;
 
         private GOST34102018256bitForm m_Sign256bitForm;
-        //private GOST34102018512bitForm m_Sign512bitForm;
+        private GOST34102018512bitForm m_Sign512bitForm;
     }
 }

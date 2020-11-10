@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+﻿using Org.BouncyCastle.Asn1.X509;
+using System;
 using System.Windows.Forms;
 
 namespace CertificateAuthority.SignatureForms
@@ -24,6 +20,8 @@ namespace CertificateAuthority.SignatureForms
 
             m_PrevButton = 0;
 
+            m_PrevTime = DateTime.Now;
+
             KeyUp += OnKeyUp;
             MouseMove += OnMouseMove;
         }
@@ -33,12 +31,14 @@ namespace CertificateAuthority.SignatureForms
             if (m_PrevMouseX != -1 && m_PrevMouseY != -1)
             {
                 int dist = e.KeyValue - m_PrevButton;
-                var rng = new Random(dist);
+                int timeDiff = Convert.ToInt32((DateTime.Now - m_PrevTime).TotalSeconds * 1000000.0) % 1000;
+                var rng = new Random(dist * timeDiff);
                 Seed += rng.Next();
                 UpdateProgressBar();
             }
 
             m_PrevButton = e.KeyValue;
+            m_PrevTime = DateTime.Now;
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
@@ -47,13 +47,15 @@ namespace CertificateAuthority.SignatureForms
             {
                 int dist = Convert.ToInt32(Math.Sqrt((e.X - m_PrevMouseX) * (e.X - m_PrevMouseX) + (e.Y - m_PrevMouseY) * (e.Y - m_PrevMouseY)));
                 int angleDegree = Convert.ToInt32(180.0 / Math.PI * Math.Atan(Convert.ToDouble(e.Y - m_PrevMouseY) / Convert.ToDouble(e.X - m_PrevMouseX)));
-                var rng = new Random(dist*angleDegree);
+                int timeDiff = Convert.ToInt32((DateTime.Now - m_PrevTime).TotalSeconds * 1000000.0) % 1000;
+                var rng = new Random(dist*angleDegree*timeDiff);
                 Seed += rng.Next();
                 UpdateProgressBar();
             }
 
             m_PrevMouseX = e.X;
             m_PrevMouseY = e.Y;
+            m_PrevTime = DateTime.Now;
         }
 
         private void UpdateProgressBar()
@@ -73,5 +75,7 @@ namespace CertificateAuthority.SignatureForms
         private int m_PrevMouseY;
 
         private int m_PrevButton;
+
+        private DateTime m_PrevTime;
     }
 }

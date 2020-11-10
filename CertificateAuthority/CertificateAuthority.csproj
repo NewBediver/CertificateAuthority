@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AsymmetricCryptography\DigitalSignature.csproj" />
+    <ProjectReference Include="..\DigitalSignature\DigitalSignature.csproj" />
     <ProjectReference Include="..\HashCryptography\HashCryptography.csproj" />
   </ItemGroup>
 

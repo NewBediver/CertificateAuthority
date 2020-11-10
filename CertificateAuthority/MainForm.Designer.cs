@@ -115,6 +115,7 @@
             this.GOST34102018512bitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.GOST34102018512bitToolStripMenuItem.Text = "512 bits";
             this.GOST34102018512bitToolStripMenuItem.ToolTipText = "Calculate and verify digital signature with GOST 34.10-2018 algorithm 512 bit";
+            this.GOST34102018512bitToolStripMenuItem.Click += new System.EventHandler(this.GOST34102018512bitToolStripMenuItem_Click);
             // 
             // label1
             // 
