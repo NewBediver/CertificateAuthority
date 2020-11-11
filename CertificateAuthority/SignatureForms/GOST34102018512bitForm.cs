@@ -1,5 +1,7 @@
 ﻿using DigitalSignature.Implementations;
 using DigitalSignature.Utility.Elliptical;
+using HashCryptography;
+using HashCryptography.Implementation;
 using System;
 using System.Text;
 using System.Windows.Forms;
@@ -36,9 +38,10 @@ namespace CertificateAuthority.SignatureForms
 
                 byte[] publicKey = StringToByte(PublicKeyTextBox.Text, 128);
                 byte[] sig = StringToByte(DigitalSignatureTextBox.Text, 128);
-                byte[] message = Encoding.Default.GetBytes(MessageTextBox.Text);
 
-                if (signature.IsSignatureValid(message, sig, publicKey))
+                byte[] hash = new HashFunction(new GOST34112018Policy512bit()).GetHash(Encoding.Default.GetBytes(MessageTextBox.Text));
+
+                if (signature.IsSignatureValid(hash, sig, publicKey))
                 {
                     ResultRichTextBox.Text = "Signature is valid";
                 }
@@ -66,9 +69,10 @@ namespace CertificateAuthority.SignatureForms
                 DigitalSignature.DigitalSignature signature = GetDigitalSignatureAlgo();
 
                 byte[] privateKey = StringToByte(PrivateKeyTextBox.Text, 64);
-                byte[] message = Encoding.Default.GetBytes(MessageTextBox.Text);
 
-                DigitalSignatureTextBox.Text = string.Join("", BitConverter.ToString(signature.CreateSignature(message, privateKey)).Split('-'));
+                byte[] hash = new HashFunction(new GOST34112018Policy512bit()).GetHash(Encoding.Default.GetBytes(MessageTextBox.Text));
+
+                DigitalSignatureTextBox.Text = string.Join("", BitConverter.ToString(signature.CreateSignature(hash, privateKey)).Split('-'));
                 ResultRichTextBox.Text = "Success";
             }
             catch (Exception exp)

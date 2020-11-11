@@ -35,14 +35,14 @@ namespace DigitalSignature
             return Policy.GeneratePublicKey(privateKey);
         }
 
-        public byte[] CreateSignature(byte[] message, byte[] privateKey)
+        public byte[] CreateSignature(byte[] messageHash, byte[] privateKey)
         {
-            return Policy.CreateSignature(message, privateKey);
+            return Policy.CreateSignature(messageHash, privateKey);
         }
 
-        public bool IsSignatureValid(byte[] message, byte[] signature, byte[] publicKey)
+        public bool IsSignatureValid(byte[] messageHash, byte[] signature, byte[] publicKey)
         {
-            return Policy.IsSignatureValid(message, signature, publicKey);
+            return Policy.IsSignatureValid(messageHash, signature, publicKey);
         }
 
         private IDigitalSignaturePolicy m_SigPolicy;

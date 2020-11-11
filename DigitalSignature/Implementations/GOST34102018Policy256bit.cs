@@ -1,7 +1,5 @@
 ﻿using AsymmetricCryptography.Utility.Elliptical;
 using DigitalSignature.Utility.Elliptical;
-using HashCryptography;
-using HashCryptography.Implementation;
 using Org.BouncyCastle.Math;
 using System;
 using System.Security.Cryptography;
@@ -53,13 +51,12 @@ namespace DigitalSignature.Implementations
             return publicKey;
         }
 
-        public byte[] CreateSignature(byte[] message, byte[] privateKey)
+        public byte[] CreateSignature(byte[] messageHash, byte[] privateKey)
         {
             BigInteger d = new BigInteger(1, privateKey);
 
             // Stage 1
-            HashFunction func = new HashFunction(new GOST34112018Policy256bit());
-            byte[] h = func.GetHash(message);
+            byte[] h = messageHash;
 
             // Stage 2
             BigInteger a = new BigInteger(1, h);
@@ -108,7 +105,7 @@ namespace DigitalSignature.Implementations
             return ans;
         }
 
-        public bool IsSignatureValid(byte[] message, byte[] signature, byte[] publicKey)
+        public bool IsSignatureValid(byte[] messageHash, byte[] signature, byte[] publicKey)
         {
             int len = 64;
             if (signature.Length != len) return false;
@@ -142,8 +139,7 @@ namespace DigitalSignature.Implementations
             }
 
             // Stage 2
-            HashFunction func = new HashFunction(new GOST34112018Policy256bit());
-            byte[] h = func.GetHash(message);
+            byte[] h = messageHash;
 
             // Stage 3
             BigInteger a = new BigInteger(1, h);
