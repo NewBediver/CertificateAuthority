@@ -16,8 +16,6 @@ namespace CertificateAuthority.SignatureForms
             GOST34102018RadioButton.Checked = true;
         }
 
-        
-
         private void VerifySignatureButton_Click(object sender, EventArgs e)
         {
             if (!IsValidSignature())

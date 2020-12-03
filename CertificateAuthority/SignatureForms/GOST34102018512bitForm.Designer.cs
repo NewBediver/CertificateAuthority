@@ -233,7 +233,7 @@
             this.Controls.Add(this.VerifySignatureButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "GOST34102018512bitForm";
-            this.Text = "GOST 34.10-2018 512 bit";
+            this.Text = "Digital Signature with GOST 34.10-2018 512 bit";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

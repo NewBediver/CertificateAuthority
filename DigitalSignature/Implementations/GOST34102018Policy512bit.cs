@@ -55,6 +55,11 @@ namespace DigitalSignature.Implementations
         {
             BigInteger d = new BigInteger(1, privateKey);
 
+            if (messageHash.Length != 64)
+            {
+                throw new Exception("Hash must be 64 bytes length!");
+            }
+
             // Stage 1
             byte[] h = messageHash;
 
@@ -136,6 +141,11 @@ namespace DigitalSignature.Implementations
             if (s.CompareTo(BigInteger.Zero) <= 0 || s.CompareTo(Q) >= 0)
             {
                 return false;
+            }
+
+            if (messageHash.Length != 64)
+            {
+                throw new Exception("Hash must be 64 bytes length!");
             }
 
             // Stage 2

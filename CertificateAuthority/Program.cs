@@ -1,7 +1,5 @@
+using CertificateAuthority.CertificateRepositoryViews;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CertificateAuthority
@@ -17,7 +15,8 @@ namespace CertificateAuthority
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
+            //Application.Run(new MainWindow());
+            Application.Run(new CountryViewForm());
         }
     }
 }

@@ -2,7 +2,7 @@ using HashCryptography;
 using HashCryptography.Implementation;
 using NUnit.Framework;
 
-namespace TestProject.HashCryptography
+namespace TestProject.HashCryptographyTest
 {
     [TestFixture]
     class GOST34112018Policy512bitTest
