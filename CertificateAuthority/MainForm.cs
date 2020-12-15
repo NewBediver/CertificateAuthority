@@ -1,4 +1,5 @@
-﻿using CertificateAuthority.HashForms;
+﻿using CertificateAuthority.CertificateRepositoryViews;
+using CertificateAuthority.HashForms;
 using CertificateAuthority.SignatureForms;
 using System;
 using System.Windows.Forms;
@@ -14,58 +15,62 @@ namespace CertificateAuthority
 
         private void GOST34112018256bitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (m_Hash256bitForm == null || m_Hash256bitForm.IsDisposed)
-            {
-                m_Hash256bitForm = new GOST34112018256bitForm();
-                m_Hash256bitForm.Show();
-            }
-            else
-            {
-                m_Hash256bitForm.WindowState = FormWindowState.Normal;
-                m_Hash256bitForm.Focus();
-            }
+            m_Hash256bitForm = UpdateForm(m_Hash256bitForm);
         }
 
         private void GOST34112018512bitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (m_Hash512bitForm == null || m_Hash512bitForm.IsDisposed)
-            {
-                m_Hash512bitForm = new GOST34112018512bitForm();
-                m_Hash512bitForm.Show();
-            }
-            else
-            {
-                m_Hash512bitForm.WindowState = FormWindowState.Normal;
-                m_Hash512bitForm.Focus();
-            }
+            m_Hash512bitForm = UpdateForm(m_Hash512bitForm);
         }
 
         private void GOST34102018256bitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (m_Sign256bitForm == null || m_Sign256bitForm.IsDisposed)
-            {
-                m_Sign256bitForm = new GOST34102018256bitForm();
-                m_Sign256bitForm.Show();
-            }
-            else
-            {
-                m_Sign256bitForm.WindowState = FormWindowState.Normal;
-                m_Sign256bitForm.Focus();
-            }
+            m_Sign256bitForm = UpdateForm(m_Sign256bitForm);
         }
 
         private void GOST34102018512bitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (m_Sign512bitForm == null || m_Sign512bitForm.IsDisposed)
+            m_Sign512bitForm = UpdateForm(m_Sign512bitForm);
+        }
+
+        private void CountriesMenuItem_Click(object sender, EventArgs e)
+        {
+            m_CountryViewForm = UpdateForm(m_CountryViewForm);
+        }
+
+        private void RegionsMenuItem_Click(object sender, EventArgs e)
+        {
+            m_RegionViewForm = UpdateForm(m_RegionViewForm);
+        }
+
+        private void CitiesMenuItem_Click(object sender, EventArgs e)
+        {
+            m_CityViewForm = UpdateForm(m_CityViewForm);
+        }
+
+        private void CitizensMenuItem_Click(object sender, EventArgs e)
+        {
+            m_CitizenViewForm = UpdateForm(m_CitizenViewForm);
+        }
+
+        private void GendersMenuItem_Click(object sender, EventArgs e)
+        {
+            m_GenderViewForm = UpdateForm(m_GenderViewForm);
+        }
+
+        private FormType UpdateForm<FormType>(FormType form) where FormType : Form, new()
+        {
+            if (form == null || form.IsDisposed)
             {
-                m_Sign512bitForm = new GOST34102018512bitForm();
-                m_Sign512bitForm.Show();
+                form = new FormType();
+                form.Show();
             }
             else
             {
-                m_Sign512bitForm.WindowState = FormWindowState.Normal;
-                m_Sign512bitForm.Focus();
+                form.WindowState = FormWindowState.Normal;
+                form.Focus();
             }
+            return form;
         }
 
         private GOST34112018256bitForm m_Hash256bitForm;
@@ -73,5 +78,11 @@ namespace CertificateAuthority
 
         private GOST34102018256bitForm m_Sign256bitForm;
         private GOST34102018512bitForm m_Sign512bitForm;
+
+        private CountryViewForm m_CountryViewForm;
+        private RegionViewForm m_RegionViewForm;
+        private CityViewForm m_CityViewForm;
+        private CitizenViewForm m_CitizenViewForm;
+        private GenderViewForm m_GenderViewForm;
     }
 }

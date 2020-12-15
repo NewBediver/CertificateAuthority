@@ -1,7 +1,7 @@
 ﻿
 namespace CertificateAuthority.CertificateRepositoryViews
 {
-    partial class CountryViewForm
+    partial class CitizenViewForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,50 +29,49 @@ namespace CertificateAuthority.CertificateRepositoryViews
         /// </summary>
         private void InitializeComponent()
         {
-            this.CountriesDataGrid = new System.Windows.Forms.DataGridView();
             this.SaveButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.CountriesDataGrid)).BeginInit();
+            this.CitizenGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.CitizenGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // CountriesDataGrid
-            // 
-            this.CountriesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CountriesDataGrid.Location = new System.Drawing.Point(13, 13);
-            this.CountriesDataGrid.Name = "CountriesDataGrid";
-            this.CountriesDataGrid.RowTemplate.Height = 25;
-            this.CountriesDataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.CountriesDataGrid.Size = new System.Drawing.Size(759, 490);
-            this.CountriesDataGrid.TabIndex = 0;
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(586, 509);
+            this.SaveButton.Location = new System.Drawing.Point(587, 509);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(185, 40);
-            this.SaveButton.TabIndex = 1;
+            this.SaveButton.TabIndex = 0;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // CountryViewForm
+            // CitizenGridView
+            // 
+            this.CitizenGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CitizenGridView.Location = new System.Drawing.Point(12, 12);
+            this.CitizenGridView.Name = "CitizenGridView";
+            this.CitizenGridView.RowTemplate.Height = 25;
+            this.CitizenGridView.Size = new System.Drawing.Size(760, 491);
+            this.CitizenGridView.TabIndex = 1;
+            // 
+            // CitizenViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.CitizenGridView);
             this.Controls.Add(this.SaveButton);
-            this.Controls.Add(this.CountriesDataGrid);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "CountryViewForm";
-            this.Text = "Country View";
-            this.Load += new System.EventHandler(this.CountryViewForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.CountriesDataGrid)).EndInit();
+            this.Name = "CitizenViewForm";
+            this.Text = "Citizen View";
+            this.Load += new System.EventHandler(this.CitizenViewForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.CitizenGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView CountriesDataGrid;
         private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.DataGridView CitizenGridView;
     }
 }

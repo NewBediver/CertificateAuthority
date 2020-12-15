@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace CertificateAuthority.CertificateRepositoryViews
 {
-    public partial class CountryViewForm : Form
+    public partial class CitizenViewForm : Form
     {
-        public CountryViewForm()
+        public CitizenViewForm()
         {
             InitializeComponent();
         }
@@ -15,13 +15,13 @@ namespace CertificateAuthority.CertificateRepositoryViews
         private void SaveButton_Click(object sender, EventArgs e)
         {
             DatabaseInstance.GetInstance().SaveChanges();
-            CountriesDataGrid.Refresh();
+            CitizenGridView.Refresh();
         }
 
-        private void CountryViewForm_Load(object sender, EventArgs e)
+        private void CitizenViewForm_Load(object sender, EventArgs e)
         {
-            DatabaseInstance.GetInstance().Countries.Load();
-            CountriesDataGrid.DataSource = DatabaseInstance.GetInstance().Countries.Local.ToBindingList();
+            DatabaseInstance.GetInstance().Citizens.Load();
+            CitizenGridView.DataSource = DatabaseInstance.GetInstance().Citizens.Local.ToBindingList();
         }
     }
 }

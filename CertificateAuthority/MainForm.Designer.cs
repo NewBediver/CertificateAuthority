@@ -37,7 +37,13 @@
             this.GOST34102018ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GOST34102018256bitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GOST34102018512bitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DatabasesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CountriesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RegionsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CitiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CitizensMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
+            this.GendersMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +51,8 @@
             // 
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.HashToolStripMenuItem,
-            this.DigitalSignatureToolStripMenuItem});
+            this.DigitalSignatureToolStripMenuItem,
+            this.DatabasesMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(784, 24);
@@ -117,6 +124,50 @@
             this.GOST34102018512bitToolStripMenuItem.ToolTipText = "Calculate and verify digital signature with GOST 34.10-2018 algorithm 512 bit";
             this.GOST34102018512bitToolStripMenuItem.Click += new System.EventHandler(this.GOST34102018512bitToolStripMenuItem_Click);
             // 
+            // DatabasesMenuItem
+            // 
+            this.DatabasesMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CountriesMenuItem,
+            this.RegionsMenuItem,
+            this.CitiesMenuItem,
+            this.CitizensMenuItem,
+            this.GendersMenuItem});
+            this.DatabasesMenuItem.Name = "DatabasesMenuItem";
+            this.DatabasesMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.DatabasesMenuItem.Text = "Databases";
+            // 
+            // CountriesMenuItem
+            // 
+            this.CountriesMenuItem.Name = "CountriesMenuItem";
+            this.CountriesMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.CountriesMenuItem.Text = "Countries";
+            this.CountriesMenuItem.ToolTipText = "Countries database";
+            this.CountriesMenuItem.Click += new System.EventHandler(this.CountriesMenuItem_Click);
+            // 
+            // RegionsMenuItem
+            // 
+            this.RegionsMenuItem.Name = "RegionsMenuItem";
+            this.RegionsMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.RegionsMenuItem.Text = "Regions";
+            this.RegionsMenuItem.ToolTipText = "Regions database";
+            this.RegionsMenuItem.Click += new System.EventHandler(this.RegionsMenuItem_Click);
+            // 
+            // CitiesMenuItem
+            // 
+            this.CitiesMenuItem.Name = "CitiesMenuItem";
+            this.CitiesMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.CitiesMenuItem.Text = "Cities";
+            this.CitiesMenuItem.ToolTipText = "Cities database";
+            this.CitiesMenuItem.Click += new System.EventHandler(this.CitiesMenuItem_Click);
+            // 
+            // CitizensMenuItem
+            // 
+            this.CitizensMenuItem.Name = "CitizensMenuItem";
+            this.CitizensMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.CitizensMenuItem.Text = "Citizens";
+            this.CitizensMenuItem.ToolTipText = "Citizens database";
+            this.CitizensMenuItem.Click += new System.EventHandler(this.CitizensMenuItem_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -126,6 +177,14 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Main Window";
             // 
+            // GendersMenuItem
+            // 
+            this.GendersMenuItem.Name = "GendersMenuItem";
+            this.GendersMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.GendersMenuItem.Text = "Genders";
+            this.GendersMenuItem.ToolTipText = "Genders database";
+            this.GendersMenuItem.Click += new System.EventHandler(this.GendersMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -133,6 +192,7 @@
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MainMenu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.MainMenu;
             this.Name = "MainWindow";
             this.Text = "Certification Authority";
@@ -155,6 +215,12 @@
         private System.Windows.Forms.ToolStripMenuItem GOST34102018ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GOST34102018256bitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GOST34102018512bitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DatabasesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CountriesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RegionsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CitiesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CitizensMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GendersMenuItem;
     }
 }
 
