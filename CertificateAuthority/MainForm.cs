@@ -58,7 +58,53 @@ namespace CertificateAuthority
             m_GenderViewForm = UpdateForm(m_GenderViewForm);
         }
 
-        private FormType UpdateForm<FormType>(FormType form) where FormType : Form, new()
+        private void IssuersMenuItem_Click(object sender, EventArgs e)
+        {
+            m_IssuerViewForm = UpdateForm(m_IssuerViewForm);
+        }
+
+        private void SubjectsMenuItem_Click(object sender, EventArgs e)
+        {
+            m_SubjectsViewForm = UpdateForm(m_SubjectsViewForm);
+        }
+
+        private void LensMenuItem_Click(object sender, EventArgs e)
+        {
+            m_LensViewForm = UpdateForm(m_LensViewForm);
+        }
+
+        private void AlgNamesMenuItem_Click(object sender, EventArgs e)
+        {
+            m_AlgNamesViewForm = UpdateForm(m_AlgNamesViewForm);
+        }
+
+        private void HashTypesMenuItem_Click(object sender, EventArgs e)
+        {
+            m_HashTypesViewForm = UpdateForm(m_HashTypesViewForm);
+        }
+
+        private void AlgParSetsMenuItem_Click(object sender, EventArgs e)
+        {
+            m_AlgParSetsViewForm = UpdateForm(m_AlgParSetsViewForm);
+        }
+
+        private void SignAlgsMenuItem_Click(object sender, EventArgs e)
+        {
+            m_SignAlgsViewForm = UpdateForm(m_SignAlgsViewForm);
+        }
+
+        private void VersMenuItem_Click(object sender, EventArgs e)
+        {
+            m_VersViewForm = UpdateForm(m_VersViewForm);
+        }
+
+        private void CertsMenuItem_Click(object sender, EventArgs e)
+        {
+            m_CertsViewForm = UpdateForm(m_CertsViewForm);
+        }
+
+        private FormType UpdateForm<FormType>(FormType form)
+            where FormType : Form, new()
         {
             if (form == null || form.IsDisposed)
             {
@@ -84,5 +130,14 @@ namespace CertificateAuthority
         private CityViewForm m_CityViewForm;
         private CitizenViewForm m_CitizenViewForm;
         private GenderViewForm m_GenderViewForm;
+        private IssuerViewForm m_IssuerViewForm;
+        private SubjectViewForm m_SubjectsViewForm;
+        private LenViewForm m_LensViewForm;
+        private AlgNameViewForm m_AlgNamesViewForm;
+        private HashTypeViewForm m_HashTypesViewForm;
+        private AlgParSetViewForm m_AlgParSetsViewForm;
+        private SignAlgViewForm m_SignAlgsViewForm;
+        private VerViewForm m_VersViewForm;
+        private CertViewForm m_CertsViewForm;
     }
 }

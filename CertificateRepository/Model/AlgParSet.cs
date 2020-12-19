@@ -19,6 +19,6 @@ namespace CertificateRepository.Model
         [ForeignKey("ID_HashType_FK")]
         public HashType HashType_AlgParSet { get; set; }
 
-        public ICollection<SignType> SignTypes_AlgParSet { get; set; }
+        public ICollection<SignAlg> SignAlgs_AlgParSet { get; set; }
     }
 }

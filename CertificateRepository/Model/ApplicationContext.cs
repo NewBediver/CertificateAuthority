@@ -20,7 +20,6 @@ namespace CertificateRepository.Model
         public DbSet<Len> Lens { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<SignAlg> SignAlgs { get; set; }
-        public DbSet<SignType> SignTypes { get; set; }
         public DbSet<Subj> Subjs { get; set; }
         public DbSet<Ver> Vers { get; set; }
 

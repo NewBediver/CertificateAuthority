@@ -37,13 +37,23 @@
             this.GOST34102018ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GOST34102018256bitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GOST34102018512bitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.DatabasesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RepositoriesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ValidCertificatesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CountriesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
             this.RegionsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CitiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CitizensMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
             this.GendersMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.IssuersMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SubjectsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LensMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AlgNamesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HashTypesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AlgParSetsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SignAlgsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.VersMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CertsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +62,7 @@
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.HashToolStripMenuItem,
             this.DigitalSignatureToolStripMenuItem,
-            this.DatabasesMenuItem});
+            this.RepositoriesMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(784, 24);
@@ -124,49 +134,43 @@
             this.GOST34102018512bitToolStripMenuItem.ToolTipText = "Calculate and verify digital signature with GOST 34.10-2018 algorithm 512 bit";
             this.GOST34102018512bitToolStripMenuItem.Click += new System.EventHandler(this.GOST34102018512bitToolStripMenuItem_Click);
             // 
-            // DatabasesMenuItem
+            // RepositoriesMenuItem
             // 
-            this.DatabasesMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RepositoriesMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ValidCertificatesMenuItem});
+            this.RepositoriesMenuItem.Name = "RepositoriesMenuItem";
+            this.RepositoriesMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.RepositoriesMenuItem.Text = "Repositories";
+            // 
+            // ValidCertificatesMenuItem
+            // 
+            this.ValidCertificatesMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CountriesMenuItem,
             this.RegionsMenuItem,
             this.CitiesMenuItem,
             this.CitizensMenuItem,
-            this.GendersMenuItem});
-            this.DatabasesMenuItem.Name = "DatabasesMenuItem";
-            this.DatabasesMenuItem.Size = new System.Drawing.Size(72, 20);
-            this.DatabasesMenuItem.Text = "Databases";
+            this.GendersMenuItem,
+            this.IssuersMenuItem,
+            this.SubjectsMenuItem,
+            this.LensMenuItem,
+            this.AlgNamesMenuItem,
+            this.HashTypesMenuItem,
+            this.AlgParSetsMenuItem,
+            this.SignAlgsMenuItem,
+            this.VersMenuItem,
+            this.CertsMenuItem});
+            this.ValidCertificatesMenuItem.Name = "ValidCertificatesMenuItem";
+            this.ValidCertificatesMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.ValidCertificatesMenuItem.Text = "Valid Certificates Database";
+            this.ValidCertificatesMenuItem.ToolTipText = "Valid Certificates Database";
             // 
             // CountriesMenuItem
             // 
             this.CountriesMenuItem.Name = "CountriesMenuItem";
-            this.CountriesMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.CountriesMenuItem.Size = new System.Drawing.Size(222, 22);
             this.CountriesMenuItem.Text = "Countries";
-            this.CountriesMenuItem.ToolTipText = "Countries database";
+            this.CountriesMenuItem.ToolTipText = "Countries table";
             this.CountriesMenuItem.Click += new System.EventHandler(this.CountriesMenuItem_Click);
-            // 
-            // RegionsMenuItem
-            // 
-            this.RegionsMenuItem.Name = "RegionsMenuItem";
-            this.RegionsMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.RegionsMenuItem.Text = "Regions";
-            this.RegionsMenuItem.ToolTipText = "Regions database";
-            this.RegionsMenuItem.Click += new System.EventHandler(this.RegionsMenuItem_Click);
-            // 
-            // CitiesMenuItem
-            // 
-            this.CitiesMenuItem.Name = "CitiesMenuItem";
-            this.CitiesMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.CitiesMenuItem.Text = "Cities";
-            this.CitiesMenuItem.ToolTipText = "Cities database";
-            this.CitiesMenuItem.Click += new System.EventHandler(this.CitiesMenuItem_Click);
-            // 
-            // CitizensMenuItem
-            // 
-            this.CitizensMenuItem.Name = "CitizensMenuItem";
-            this.CitizensMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.CitizensMenuItem.Text = "Citizens";
-            this.CitizensMenuItem.ToolTipText = "Citizens database";
-            this.CitizensMenuItem.Click += new System.EventHandler(this.CitizensMenuItem_Click);
             // 
             // label1
             // 
@@ -177,13 +181,109 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Main Window";
             // 
+            // RegionsMenuItem
+            // 
+            this.RegionsMenuItem.Name = "RegionsMenuItem";
+            this.RegionsMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.RegionsMenuItem.Text = "Regions";
+            this.RegionsMenuItem.ToolTipText = "Regions table";
+            this.RegionsMenuItem.Click += new System.EventHandler(this.RegionsMenuItem_Click);
+            // 
+            // CitiesMenuItem
+            // 
+            this.CitiesMenuItem.Name = "CitiesMenuItem";
+            this.CitiesMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.CitiesMenuItem.Text = "Cities";
+            this.CitiesMenuItem.ToolTipText = "Cities table";
+            this.CitiesMenuItem.Click += new System.EventHandler(this.CitiesMenuItem_Click);
+            // 
+            // CitizensMenuItem
+            // 
+            this.CitizensMenuItem.Name = "CitizensMenuItem";
+            this.CitizensMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.CitizensMenuItem.Text = "Citizens";
+            this.CitizensMenuItem.ToolTipText = "Citizens table";
+            this.CitizensMenuItem.Click += new System.EventHandler(this.CitizensMenuItem_Click);
+            // 
             // GendersMenuItem
             // 
             this.GendersMenuItem.Name = "GendersMenuItem";
-            this.GendersMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.GendersMenuItem.Size = new System.Drawing.Size(222, 22);
             this.GendersMenuItem.Text = "Genders";
-            this.GendersMenuItem.ToolTipText = "Genders database";
+            this.GendersMenuItem.ToolTipText = "Genders table";
             this.GendersMenuItem.Click += new System.EventHandler(this.GendersMenuItem_Click);
+            // 
+            // IssuersMenuItem
+            // 
+            this.IssuersMenuItem.Name = "IssuersMenuItem";
+            this.IssuersMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.IssuersMenuItem.Text = "Issuers";
+            this.IssuersMenuItem.ToolTipText = "Issuers table";
+            this.IssuersMenuItem.Click += new System.EventHandler(this.IssuersMenuItem_Click);
+            // 
+            // SubjectsMenuItem
+            // 
+            this.SubjectsMenuItem.Name = "SubjectsMenuItem";
+            this.SubjectsMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.SubjectsMenuItem.Text = "Subjects";
+            this.SubjectsMenuItem.ToolTipText = "Subjects table";
+            this.SubjectsMenuItem.Click += new System.EventHandler(this.SubjectsMenuItem_Click);
+            // 
+            // LensMenuItem
+            // 
+            this.LensMenuItem.Name = "LensMenuItem";
+            this.LensMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.LensMenuItem.Text = "Lengths";
+            this.LensMenuItem.ToolTipText = "Lens table";
+            this.LensMenuItem.Click += new System.EventHandler(this.LensMenuItem_Click);
+            // 
+            // AlgNamesMenuItem
+            // 
+            this.AlgNamesMenuItem.Name = "AlgNamesMenuItem";
+            this.AlgNamesMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.AlgNamesMenuItem.Text = "Algorithm\'s Names";
+            this.AlgNamesMenuItem.ToolTipText = "AlgNames table";
+            this.AlgNamesMenuItem.Click += new System.EventHandler(this.AlgNamesMenuItem_Click);
+            // 
+            // HashTypesMenuItem
+            // 
+            this.HashTypesMenuItem.Name = "HashTypesMenuItem";
+            this.HashTypesMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.HashTypesMenuItem.Text = "Hash Types";
+            this.HashTypesMenuItem.ToolTipText = "HashTypes table";
+            this.HashTypesMenuItem.Click += new System.EventHandler(this.HashTypesMenuItem_Click);
+            // 
+            // AlgParSetsMenuItem
+            // 
+            this.AlgParSetsMenuItem.Name = "AlgParSetsMenuItem";
+            this.AlgParSetsMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.AlgParSetsMenuItem.Text = "Algorithm\'s Parameters Sets";
+            this.AlgParSetsMenuItem.ToolTipText = "AlgParSets table";
+            this.AlgParSetsMenuItem.Click += new System.EventHandler(this.AlgParSetsMenuItem_Click);
+            // 
+            // SignAlgsMenuItem
+            // 
+            this.SignAlgsMenuItem.Name = "SignAlgsMenuItem";
+            this.SignAlgsMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.SignAlgsMenuItem.Text = "Sign Algorithms";
+            this.SignAlgsMenuItem.ToolTipText = "SignAlgs table";
+            this.SignAlgsMenuItem.Click += new System.EventHandler(this.SignAlgsMenuItem_Click);
+            // 
+            // VersMenuItem
+            // 
+            this.VersMenuItem.Name = "VersMenuItem";
+            this.VersMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.VersMenuItem.Text = "Versions";
+            this.VersMenuItem.ToolTipText = "Vers table";
+            this.VersMenuItem.Click += new System.EventHandler(this.VersMenuItem_Click);
+            // 
+            // CertsMenuItem
+            // 
+            this.CertsMenuItem.Name = "CertsMenuItem";
+            this.CertsMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.CertsMenuItem.Text = "Certificates";
+            this.CertsMenuItem.ToolTipText = "Certs table";
+            this.CertsMenuItem.Click += new System.EventHandler(this.CertsMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -215,12 +315,22 @@
         private System.Windows.Forms.ToolStripMenuItem GOST34102018ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GOST34102018256bitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GOST34102018512bitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem DatabasesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RepositoriesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ValidCertificatesMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CountriesMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RegionsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CitiesMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CitizensMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GendersMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem IssuersMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SubjectsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem LensMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AlgNamesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HashTypesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AlgParSetsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SignAlgsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem VersMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CertsMenuItem;
     }
 }
 

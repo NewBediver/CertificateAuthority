@@ -11,9 +11,9 @@ namespace CertificateRepository.Model
         public byte[] PublicKey_SignAlg { get; set; }
         public byte[] PrivateKey_SignAlg { get; set; }
 
-        public int ID_SignType_FK { get; set; }
-        [ForeignKey("ID_SignType_FK")]
-        public SignType SignType_SignAlg { get; set; }
+        public int ID_AlgParSet_FK { get; set; }
+        [ForeignKey("ID_AlgParSet_FK")]
+        public AlgParSet AlgParSet_SignAlg { get; set; }
 
         public ICollection<Cert> Certs_SignAlg { get; set; }
     }
