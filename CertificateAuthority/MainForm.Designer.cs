@@ -40,7 +40,6 @@
             this.RepositoriesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ValidCertificatesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CountriesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
             this.RegionsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CitiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CitizensMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +53,8 @@
             this.SignAlgsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.VersMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CertsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.CreateCertificateButton = new System.Windows.Forms.Button();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -172,15 +173,6 @@
             this.CountriesMenuItem.ToolTipText = "Countries table";
             this.CountriesMenuItem.Click += new System.EventHandler(this.CountriesMenuItem_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(210, 93);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 15);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Main Window";
-            // 
             // RegionsMenuItem
             // 
             this.RegionsMenuItem.Name = "RegionsMenuItem";
@@ -285,11 +277,31 @@
             this.CertsMenuItem.ToolTipText = "Certs table";
             this.CertsMenuItem.Click += new System.EventHandler(this.CertsMenuItem_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(210, 93);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 15);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Main Window";
+            // 
+            // CreateCertificateButton
+            // 
+            this.CreateCertificateButton.Location = new System.Drawing.Point(12, 27);
+            this.CreateCertificateButton.Name = "CreateCertificateButton";
+            this.CreateCertificateButton.Size = new System.Drawing.Size(120, 40);
+            this.CreateCertificateButton.TabIndex = 5;
+            this.CreateCertificateButton.Text = "Create Certificate";
+            this.CreateCertificateButton.UseVisualStyleBackColor = true;
+            this.CreateCertificateButton.Click += new System.EventHandler(this.CreateCertificateButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.CreateCertificateButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MainMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -331,6 +343,7 @@
         private System.Windows.Forms.ToolStripMenuItem SignAlgsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem VersMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CertsMenuItem;
+        private System.Windows.Forms.Button CreateCertificateButton;
     }
 }
 

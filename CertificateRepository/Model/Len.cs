@@ -9,6 +9,6 @@ namespace CertificateRepository.Model
         public int ID_Len_PK { get; set; }
         public int Value_Len { get; set; }
 
-        public ICollection<HashType> HashTypes_Len { get; set; }
+        public ICollection<AlgParSet> AlgParSets_Len { get; set; }
     }
 }

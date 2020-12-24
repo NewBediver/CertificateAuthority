@@ -1,4 +1,5 @@
-﻿using CertificateAuthority.CertificateRepositoryViews;
+﻿using CertificateAuthority.BehaviourForms;
+using CertificateAuthority.CertificateRepositoryViews;
 using CertificateAuthority.HashForms;
 using CertificateAuthority.SignatureForms;
 using System;
@@ -13,6 +14,7 @@ namespace CertificateAuthority
             InitializeComponent();
         }
 
+        #region Hash
         private void GOST34112018256bitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_Hash256bitForm = UpdateForm(m_Hash256bitForm);
@@ -22,7 +24,9 @@ namespace CertificateAuthority
         {
             m_Hash512bitForm = UpdateForm(m_Hash512bitForm);
         }
+        #endregion
 
+        #region Digital Signature
         private void GOST34102018256bitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_Sign256bitForm = UpdateForm(m_Sign256bitForm);
@@ -32,7 +36,9 @@ namespace CertificateAuthority
         {
             m_Sign512bitForm = UpdateForm(m_Sign512bitForm);
         }
+        #endregion
 
+        #region Repositories
         private void CountriesMenuItem_Click(object sender, EventArgs e)
         {
             m_CountryViewForm = UpdateForm(m_CountryViewForm);
@@ -102,6 +108,14 @@ namespace CertificateAuthority
         {
             m_CertsViewForm = UpdateForm(m_CertsViewForm);
         }
+        #endregion
+
+        #region Buttons
+        private void CreateCertificateButton_Click(object sender, EventArgs e)
+        {
+            m_CreateCertificateForm = UpdateForm(m_CreateCertificateForm);
+        }
+        #endregion
 
         private FormType UpdateForm<FormType>(FormType form)
             where FormType : Form, new()
@@ -139,5 +153,7 @@ namespace CertificateAuthority
         private SignAlgViewForm m_SignAlgsViewForm;
         private VerViewForm m_VersViewForm;
         private CertViewForm m_CertsViewForm;
+
+        private CreateCertificateForm m_CreateCertificateForm;
     }
 }
