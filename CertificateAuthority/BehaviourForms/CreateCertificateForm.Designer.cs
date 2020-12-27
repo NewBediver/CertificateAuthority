@@ -241,6 +241,7 @@ namespace CertificateAuthority.BehaviourForms
             this.SubjRegionComboBox.Name = "SubjRegionComboBox";
             this.SubjRegionComboBox.Size = new System.Drawing.Size(164, 23);
             this.SubjRegionComboBox.TabIndex = 2;
+            this.SubjRegionComboBox.SelectedIndexChanged += new System.EventHandler(this.SubjRegionComboBox_SelectedIndexChanged);
             // 
             // SubjBirthdateDateTimePicker
             // 
@@ -252,7 +253,7 @@ namespace CertificateAuthority.BehaviourForms
             // SubjCountryLabel
             // 
             this.SubjCountryLabel.AutoSize = true;
-            this.SubjCountryLabel.Location = new System.Drawing.Point(306, 80);
+            this.SubjCountryLabel.Location = new System.Drawing.Point(306, 77);
             this.SubjCountryLabel.Name = "SubjCountryLabel";
             this.SubjCountryLabel.Size = new System.Drawing.Size(50, 15);
             this.SubjCountryLabel.TabIndex = 1;
@@ -265,6 +266,7 @@ namespace CertificateAuthority.BehaviourForms
             this.SubjCountryComboBox.Name = "SubjCountryComboBox";
             this.SubjCountryComboBox.Size = new System.Drawing.Size(164, 23);
             this.SubjCountryComboBox.TabIndex = 6;
+            this.SubjCountryComboBox.SelectedIndexChanged += new System.EventHandler(this.SubjCountryComboBox_SelectedIndexChanged);
             // 
             // SubjCitizenshipLabel
             // 
@@ -363,7 +365,7 @@ namespace CertificateAuthority.BehaviourForms
             this.AlgParSetGroupBox.Controls.Add(this.AlgParSetLenComboBox);
             this.AlgParSetGroupBox.Location = new System.Drawing.Point(551, 12);
             this.AlgParSetGroupBox.Name = "AlgParSetGroupBox";
-            this.AlgParSetGroupBox.Size = new System.Drawing.Size(221, 537);
+            this.AlgParSetGroupBox.Size = new System.Drawing.Size(421, 537);
             this.AlgParSetGroupBox.TabIndex = 2;
             this.AlgParSetGroupBox.TabStop = false;
             this.AlgParSetGroupBox.Text = "Parameters";
@@ -373,7 +375,7 @@ namespace CertificateAuthority.BehaviourForms
             this.AlgParSetDataGroupBox.Controls.Add(this.AlgParSetDataRichTextBox);
             this.AlgParSetDataGroupBox.Location = new System.Drawing.Point(6, 135);
             this.AlgParSetDataGroupBox.Name = "AlgParSetDataGroupBox";
-            this.AlgParSetDataGroupBox.Size = new System.Drawing.Size(209, 396);
+            this.AlgParSetDataGroupBox.Size = new System.Drawing.Size(409, 396);
             this.AlgParSetDataGroupBox.TabIndex = 3;
             this.AlgParSetDataGroupBox.TabStop = false;
             this.AlgParSetDataGroupBox.Text = "Generation Parameters";
@@ -383,7 +385,7 @@ namespace CertificateAuthority.BehaviourForms
             this.AlgParSetDataRichTextBox.Location = new System.Drawing.Point(6, 22);
             this.AlgParSetDataRichTextBox.Name = "AlgParSetDataRichTextBox";
             this.AlgParSetDataRichTextBox.ReadOnly = true;
-            this.AlgParSetDataRichTextBox.Size = new System.Drawing.Size(197, 368);
+            this.AlgParSetDataRichTextBox.Size = new System.Drawing.Size(397, 368);
             this.AlgParSetDataRichTextBox.TabIndex = 3;
             this.AlgParSetDataRichTextBox.Text = "";
             // 
@@ -401,15 +403,16 @@ namespace CertificateAuthority.BehaviourForms
             this.AlgParSetOIDComboBox.FormattingEnabled = true;
             this.AlgParSetOIDComboBox.Location = new System.Drawing.Point(126, 106);
             this.AlgParSetOIDComboBox.Name = "AlgParSetOIDComboBox";
-            this.AlgParSetOIDComboBox.Size = new System.Drawing.Size(89, 23);
+            this.AlgParSetOIDComboBox.Size = new System.Drawing.Size(289, 23);
             this.AlgParSetOIDComboBox.TabIndex = 4;
+            this.AlgParSetOIDComboBox.SelectedIndexChanged += new System.EventHandler(this.AlgParSetOIDComboBox_SelectedIndexChanged);
             // 
             // AlgParSetSignatureComboBox
             // 
             this.AlgParSetSignatureComboBox.FormattingEnabled = true;
             this.AlgParSetSignatureComboBox.Location = new System.Drawing.Point(126, 77);
             this.AlgParSetSignatureComboBox.Name = "AlgParSetSignatureComboBox";
-            this.AlgParSetSignatureComboBox.Size = new System.Drawing.Size(89, 23);
+            this.AlgParSetSignatureComboBox.Size = new System.Drawing.Size(289, 23);
             this.AlgParSetSignatureComboBox.TabIndex = 3;
             // 
             // AlgParSetSignatureLabel
@@ -435,7 +438,7 @@ namespace CertificateAuthority.BehaviourForms
             this.AlgParSetHashComboBox.FormattingEnabled = true;
             this.AlgParSetHashComboBox.Location = new System.Drawing.Point(126, 48);
             this.AlgParSetHashComboBox.Name = "AlgParSetHashComboBox";
-            this.AlgParSetHashComboBox.Size = new System.Drawing.Size(89, 23);
+            this.AlgParSetHashComboBox.Size = new System.Drawing.Size(289, 23);
             this.AlgParSetHashComboBox.TabIndex = 4;
             // 
             // AlgParSetLenLabel
@@ -452,20 +455,22 @@ namespace CertificateAuthority.BehaviourForms
             this.AlgParSetLenComboBox.FormattingEnabled = true;
             this.AlgParSetLenComboBox.Location = new System.Drawing.Point(126, 19);
             this.AlgParSetLenComboBox.Name = "AlgParSetLenComboBox";
-            this.AlgParSetLenComboBox.Size = new System.Drawing.Size(89, 23);
+            this.AlgParSetLenComboBox.Size = new System.Drawing.Size(289, 23);
             this.AlgParSetLenComboBox.TabIndex = 4;
+            this.AlgParSetLenComboBox.SelectedIndexChanged += new System.EventHandler(this.AlgParSetLenComboBox_SelectedIndexChanged);
             // 
             // CreateCertificateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.AlgParSetGroupBox);
             this.Controls.Add(this.CreateButton);
             this.Controls.Add(this.UserInfoBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CreateCertificateForm";
             this.Text = "CreateCertificateForm";
+            this.Load += new System.EventHandler(this.CreateCertificateForm_Load);
             this.UserInfoBox.ResumeLayout(false);
             this.UserInfoBox.PerformLayout();
             this.AlgParSetGroupBox.ResumeLayout(false);

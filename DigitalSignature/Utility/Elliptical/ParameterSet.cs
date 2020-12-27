@@ -26,6 +26,18 @@
         public byte[] X { get; }
         public byte[] Y { get; }
 
+        public static ID GetIDFromOID(string OID)
+        {
+            if (OID == "1.2.643.7.1.2.1.2.1.") return ID.ParamSetA512;
+            else if (OID == "1.2.643.7.1.2.1.2.2.") return ID.ParamSetB512;
+            else if (OID == "1.2.643.7.1.2.1.1.2.") return ID.ParamSetB256;
+            else if (OID == "1.2.643.7.1.2.1.1.2.") return ID.ParamSetB256;
+            else if (OID == "1.2.643.7.1.2.1.1.3.") return ID.ParamSetC256;
+            else if (OID == "1.2.643.7.1.2.1.1.4.") return ID.ParamSetD256;
+
+            throw new System.Exception("Wrong OID!");
+        }
+
         public ParameterSet(ID id)
         {
             switch (id)
