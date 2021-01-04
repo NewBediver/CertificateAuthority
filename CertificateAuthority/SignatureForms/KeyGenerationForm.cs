@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace CertificateAuthority.SignatureForms
@@ -6,12 +7,12 @@ namespace CertificateAuthority.SignatureForms
     public partial class KeyGenerationForm
         : Form
     {
-        public int Seed { get; private set; }
+        public List<byte> Seed { get; private set; }
 
         public KeyGenerationForm()
         {
             InitializeComponent();
-            Seed = 0;
+            Seed = new List<byte>();
             DialogResult = DialogResult.None;
 
             m_PrevMouseX = -1;
@@ -20,6 +21,7 @@ namespace CertificateAuthority.SignatureForms
             m_PrevButton = 0;
 
             m_PrevTime = DateTime.Now;
+            m_Step = 0;
 
             KeyUp += OnKeyUp;
             MouseMove += OnMouseMove;
@@ -32,7 +34,7 @@ namespace CertificateAuthority.SignatureForms
                 int dist = e.KeyValue - m_PrevButton;
                 int timeDiff = Convert.ToInt32((DateTime.Now - m_PrevTime).TotalSeconds * 1000000.0) % 1000;
                 var rng = new Random(dist * timeDiff);
-                Seed += rng.Next();
+                Seed.Add(Convert.ToByte(rng.Next(0, 255)));
                 UpdateProgressBar();
             }
 
@@ -48,7 +50,7 @@ namespace CertificateAuthority.SignatureForms
                 int angleDegree = Convert.ToInt32(180.0 / Math.PI * Math.Atan(Convert.ToDouble(e.Y - m_PrevMouseY) / Convert.ToDouble(e.X - m_PrevMouseX)));
                 int timeDiff = Convert.ToInt32((DateTime.Now - m_PrevTime).TotalSeconds * 1000000.0) % 1000;
                 var rng = new Random(dist*angleDegree*timeDiff);
-                Seed += rng.Next();
+                Seed.Add(Convert.ToByte(rng.Next(0, 255)));
                 UpdateProgressBar();
             }
 
@@ -65,8 +67,13 @@ namespace CertificateAuthority.SignatureForms
             }
             else
             {
-                DialogResult = DialogResult.OK;
-                Close();
+                ++m_Step;
+                if (m_Step >= 100)
+                {
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+                else GenerationProgressBar.Value = 0;
             }
         }
 
@@ -76,5 +83,6 @@ namespace CertificateAuthority.SignatureForms
         private int m_PrevButton;
 
         private DateTime m_PrevTime;
+        private int m_Step;
     }
 }

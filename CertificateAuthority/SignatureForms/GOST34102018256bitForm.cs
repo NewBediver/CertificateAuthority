@@ -88,7 +88,12 @@ namespace CertificateAuthority.SignatureForms
                 {
                     var signature = GetDigitalSignatureAlgo();
 
-                    var priv = signature.GeneratePrivateKey(form.Seed);
+                    var priv = signature.GeneratePrivateKey(
+                          Convert.ToInt32(form.Seed[0])
+                        + Convert.ToInt32(form.Seed[1] << 8)
+                        + Convert.ToInt32(form.Seed[2] << 16)
+                        + Convert.ToInt32(form.Seed[3] << 24)
+                    );
                     var pub = signature.GeneratePublicKey(priv);
 
                     PublicKeyTextBox.Text = string.Join("", BitConverter.ToString(pub).Split('-'));

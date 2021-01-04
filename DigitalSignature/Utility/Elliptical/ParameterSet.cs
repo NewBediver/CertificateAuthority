@@ -1,4 +1,6 @@
-﻿namespace DigitalSignature.Utility.Elliptical
+﻿using System.Collections.Generic;
+
+namespace DigitalSignature.Utility.Elliptical
 {
     /// <summary>
     /// Coefficients from P 1323565.1.024—2019
@@ -9,6 +11,7 @@
         {
             ParamSetA512,
             ParamSetB512,
+            ParamSetA256,
             ParamSetB256,
             ParamSetC256,
             ParamSetD256,
@@ -28,12 +31,24 @@
 
         public static ID GetIDFromOID(string OID)
         {
-            if (OID == "1.2.643.7.1.2.1.2.1.") return ID.ParamSetA512;
-            else if (OID == "1.2.643.7.1.2.1.2.2.") return ID.ParamSetB512;
-            else if (OID == "1.2.643.7.1.2.1.1.2.") return ID.ParamSetB256;
-            else if (OID == "1.2.643.7.1.2.1.1.2.") return ID.ParamSetB256;
-            else if (OID == "1.2.643.7.1.2.1.1.3.") return ID.ParamSetC256;
-            else if (OID == "1.2.643.7.1.2.1.1.4.") return ID.ParamSetD256;
+            if (OID == "1.2.643.7.1.2.1.2.1") return ID.ParamSetA512;
+            else if (OID == "1.2.643.7.1.2.1.2.2") return ID.ParamSetB512;
+            else if (OID == "1.2.643.7.1.2.1.1.1") return ID.ParamSetA256;
+            else if (OID == "1.2.643.7.1.2.1.1.2") return ID.ParamSetB256;
+            else if (OID == "1.2.643.7.1.2.1.1.3") return ID.ParamSetC256;
+            else if (OID == "1.2.643.7.1.2.1.1.4") return ID.ParamSetD256;
+
+            throw new System.Exception("Wrong OID!");
+        }
+
+        public static string GetParametersNameFromOID(string OID)
+        {
+            if (OID == "1.2.643.7.1.2.1.2.1") return "id-tc26-gost-3410-12-512-paramSetA";
+            else if (OID == "1.2.643.7.1.2.1.2.2") return "id-tc26-gost-3410-12-512-paramSetB";
+            else if (OID == "1.2.643.7.1.2.1.1.1") return "id-tc26-gost-3410-2012-256-paramSetA";
+            else if (OID == "1.2.643.7.1.2.1.1.2") return "id-tc26-gost-3410-2012-256-paramSetB";
+            else if (OID == "1.2.643.7.1.2.1.1.3") return "id-tc26-gost-3410-2012-256-paramSetC";
+            else if (OID == "1.2.643.7.1.2.1.1.4") return "id-tc26-gost-3410-2012-256-paramSetD";
 
             throw new System.Exception("Wrong OID!");
         }
@@ -46,7 +61,7 @@
                 case ID.ParamSetA512:
                 {
                     Name = "id-tc26-gost-3410-12-512-paramSetA";
-                    OID = "1.2.643.7.1.2.1.2.1.";
+                    OID = "1.2.643.7.1.2.1.2.1";
                     P = new byte[]
                     {
                         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
@@ -124,7 +139,7 @@
                 case ID.ParamSetB512:
                 {
                     Name = "id-tc26-gost-3410-12-512-paramSetB";
-                    OID = "1.2.643.7.1.2.1.2.2.";
+                    OID = "1.2.643.7.1.2.1.2.2";
                         P = new byte[]
                     {
                         0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -198,11 +213,68 @@
                     break;
                 }
                 #endregion
+                #region id-tc26-gost-3410-2012-256-paramSetA
+                case ID.ParamSetA256:
+                {
+                    Name = "id-tc26-gost-3410-2012-256-paramSetA";
+                    OID = "1.2.643.7.1.2.1.1.1";
+                    P = new byte[]
+                    {
+                        0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+                        0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+                        0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+                        0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD, 0x97
+                    };
+                    A = new byte[]
+                    {
+                        0xC2, 0x17, 0x3F, 0x15, 0x13, 0x98, 0x16, 0x73,
+                        0xAF, 0x48, 0x92, 0xC2, 0x30, 0x35, 0xA2, 0x7C,
+                        0xE2, 0x5E, 0x20, 0x13, 0xBF, 0x95, 0xAA, 0x33,
+                        0xB2, 0x2C, 0x65, 0x6F, 0x27, 0x7E, 0x73, 0x35
+                    };
+                    B = new byte[]
+                    {
+                        0x29, 0x5F, 0x9B, 0xAE, 0x74, 0x28, 0xED, 0x9C,
+                        0xCC, 0x20, 0xE7, 0xC3, 0x59, 0xA9, 0xD4, 0x1A,
+                        0x22, 0xFC, 0xCD, 0x91, 0x08, 0xE1, 0x7B, 0xF7,
+                        0xBA, 0x93, 0x37, 0xA6, 0xF8, 0xAE, 0x95, 0x13
+                    };
+                    M = new byte[]
+                    {
+                        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                        0x3F, 0x63, 0x37, 0x7F, 0x21, 0xED, 0x98, 0xD7,
+                        0x04, 0x56, 0xBD, 0x55, 0xB0, 0xD8, 0x31, 0x9C
+                    };
+                    Q = new byte[]
+                    {
+                        0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                        0x0F, 0xD8, 0xCD, 0xDF, 0xC8, 0x7B, 0x66, 0x35,
+                        0xC1, 0x15, 0xAF, 0x55, 0x6C, 0x36, 0x0C, 0x67
+                    };
+                    X = new byte[]
+                    {
+                        0x91, 0xE3, 0x84, 0x43, 0xA5, 0xE8, 0x2C, 0x0D,
+                        0x88, 0x09, 0x23, 0x42, 0x57, 0x12, 0xB2, 0xBB,
+                        0x65, 0x8B, 0x91, 0x96, 0x93, 0x2E, 0x02, 0xC7,
+                        0x8B, 0x25, 0x82, 0xFE, 0x74, 0x2D, 0xAA, 0x28
+                    };
+                    Y = new byte[]
+                    {
+                        0x32, 0x87, 0x94, 0x23, 0xAB, 0x1A, 0x03, 0x75,
+                        0x89, 0x57, 0x86, 0xC4, 0xBB, 0x46, 0xE9, 0x56,
+                        0x5F, 0xDE, 0x0B, 0x53, 0x44, 0x76, 0x67, 0x40,
+                        0xAF, 0x26, 0x8A, 0xDB, 0x32, 0x32, 0x2E, 0x5C
+                    };
+                    break;
+                }
+                #endregion
                 #region id-tc26-gost-3410-2012-256-paramSetB
                 case ID.ParamSetB256:
                 {
                     Name = "id-tc26-gost-3410-2012-256-paramSetB";
-                    OID = "1.2.643.7.1.2.1.1.2.";
+                    OID = "1.2.643.7.1.2.1.1.2";
                     P = new byte[]
                     {
                         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
@@ -253,7 +325,7 @@
                 case ID.ParamSetC256:
                 {
                     Name = "id-tc26-gost-3410-2012-256-paramSetC";
-                    OID = "1.2.643.7.1.2.1.1.3.";
+                    OID = "1.2.643.7.1.2.1.1.3";
                     P = new byte[]
                     {
                         0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -307,7 +379,7 @@
                 case ID.ParamSetD256:
                 {
                     Name = "id-tc26-gost-3410-2012-256-paramSetD";
-                    OID = "1.2.643.7.1.2.1.1.4.";
+                    OID = "1.2.643.7.1.2.1.1.4";
                     P = new byte[]
                     {
                         0x9b, 0x9f, 0x60, 0x5f, 0x5a, 0x85, 0x81, 0x07,
@@ -486,6 +558,19 @@
                     }
                     #endregion
             }
+        }
+
+        public byte[] GetParametersArray()
+        {
+            List<byte> res = new List<byte>();
+            res.AddRange(P);
+            res.AddRange(A);
+            res.AddRange(B);
+            res.AddRange(M);
+            res.AddRange(Q);
+            res.AddRange(X);
+            res.AddRange(Y);
+            return res.ToArray();
         }
     }
 }
