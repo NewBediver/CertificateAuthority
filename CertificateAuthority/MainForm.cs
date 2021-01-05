@@ -1,8 +1,10 @@
 ﻿using CertificateAuthority.BehaviourForms;
 using CertificateAuthority.CertificateRepositoryViews;
+using CertificateAuthority.Components;
 using CertificateAuthority.HashForms;
 using CertificateAuthority.SignatureForms;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace CertificateAuthority
@@ -114,6 +116,27 @@ namespace CertificateAuthority
         private void CreateCertificateButton_Click(object sender, EventArgs e)
         {
             m_CreateCertificateForm = UpdateForm(m_CreateCertificateForm);
+        }
+
+        private void GetRootCertificateButton_Click(object sender, EventArgs e)
+        {
+            var certificate = X509CertificateController.GetRootCertificate();
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "X509 Certificate|*.crt";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.Title = "Save a Certificate File";
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Stream dataStream;
+                if ((dataStream = saveFileDialog.OpenFile()) != null)
+                {
+                    dataStream.Write(certificate, 0, certificate.Length);
+                    dataStream.Close();
+                }
+            }
         }
         #endregion
 

@@ -249,7 +249,7 @@ namespace CertificateAuthority.BehaviourForms
                     Stream dataStream;
                     if ((dataStream = saveFileDialog.OpenFile()) != null)
                     {
-                        dataStream.Write(certificate.GetEncoded(), 0, certificate.GetEncoded().Length);
+                        dataStream.Write(certificate, 0, certificate.Length);
                         dataStream.Close();
                     }
                 }

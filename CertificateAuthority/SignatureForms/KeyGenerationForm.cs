@@ -61,19 +61,19 @@ namespace CertificateAuthority.SignatureForms
 
         private void UpdateProgressBar()
         {
-            if (GenerationProgressBar.Value < 100)
+            if (m_Step < 100)
             {
-                ++GenerationProgressBar.Value;
+                ++m_Step;
             }
             else
             {
-                ++m_Step;
-                if (m_Step >= 100)
+                ++GenerationProgressBar.Value;
+                if (GenerationProgressBar.Value >= GenerationProgressBar.Maximum)
                 {
                     DialogResult = DialogResult.OK;
                     Close();
                 }
-                else GenerationProgressBar.Value = 0;
+                else m_Step = 0;
             }
         }
 

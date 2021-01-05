@@ -6,7 +6,6 @@ using DigitalSignature.Utility.Elliptical;
 using HashCryptography;
 using HashCryptography.Implementation;
 using Microsoft.EntityFrameworkCore;
-using Org.BouncyCastle.Asn1.Rosstandart;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Generators;
@@ -16,6 +15,7 @@ using Org.BouncyCastle.Pkcs;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.X509;
+using Org.BouncyCastle.X509.Extension;
 using System;
 using System.Collections;
 using System.Linq;
@@ -25,9 +25,9 @@ namespace CertificateAuthority.Components
 {
     class X509CertificateController
     {
-        public static X509Certificate GetSignedCertificate(AlgParSet parameters, Subj subj)
+        public static byte[] GetSignedCertificate(AlgParSet parameters, Subj subj)
         {
-            X509Certificate root = GetRootCertificate();
+            X509Certificate root = new X509CertificateParser().ReadCertificate(GetRootCertificate());
             Cert data = CreateDatabaseInfoFromCertificate(root);
 
             Cert certificate = new Cert();
@@ -50,7 +50,7 @@ namespace CertificateAuthority.Components
             while (DatabaseInstance.GetInstance().Certs.FirstOrDefault(elm => elm.SerialNumber_Cert == certificate.SerialNumber_Cert) != null);
             certificate.ValidFrom_Cert = DateTime.Now;
             certificate.ValidBy_Cert = DateTimeOffset.Now.AddYears(5).UtcDateTime;
-            certificate.SignSerialNumber_Cert = data.SignSerialNumber_Cert;
+            certificate.SignSerialNumber_Cert = data.SerialNumber_Cert;
 
             var cert = CreateCertificateFromDatabaseInfo(certificate);
             certificate.SignValue_Cert = string.Join("", BitConverter.ToString(cert.GetSignature()).Split('-'));
@@ -58,10 +58,10 @@ namespace CertificateAuthority.Components
             DatabaseInstance.GetInstance().Certs.Add(certificate);
             DatabaseInstance.GetInstance().SaveChanges();
 
-            return cert;
+            return cert.GetEncoded();
         }
 
-        public static X509Certificate GetRootCertificate()
+        public static byte[] GetRootCertificate()
         {
             Issuer certificationAuthority = GetCurrentCertificationAuthority();
             if (certificationAuthority == null)
@@ -122,9 +122,11 @@ namespace CertificateAuthority.Components
 
                 DatabaseInstance.GetInstance().Certs.Add(certificate);
                 DatabaseInstance.GetInstance().SaveChanges();
+
+                return cert.GetEncoded();
             }
 
-            return CreateCertificateFromDatabaseInfo(certificate);
+            return CreateCertificateFromDatabaseInfo(certificate).GetEncoded();
         }
 
         private static Issuer GetCurrentCertificationAuthority()
@@ -234,6 +236,12 @@ namespace CertificateAuthority.Components
                 PrivateKeyFactory.CreateKey(certificate.SignAlg_Cert.PrivateKey_SignAlg)
             );
 
+            X509Certificate rootCert = null;
+            if (certificate.Issuer_Cert.Name_Issuer != certificate.Subj_Cert.Name_Subj)
+            {
+                rootCert = new X509CertificateParser().ReadCertificate(GetRootCertificate());
+            }
+
             X509V3CertificateGenerator certGen = new X509V3CertificateGenerator();
             certGen.SetSerialNumber(new BigInteger(certificate.SerialNumber_Cert));
             certGen.SetIssuerDN(new X509Name(issuerOrd, issuerAttrs));
@@ -241,12 +249,27 @@ namespace CertificateAuthority.Components
             certGen.SetNotAfter(certificate.ValidBy_Cert);
             certGen.SetSubjectDN(new X509Name(subjOrd, subjAttrs));
             certGen.SetPublicKey(kp.Public);
-            certGen.AddExtension(X509Extensions.AuthorityKeyIdentifier, true, new AuthorityKeyIdentifier(new SubjectPublicKeyInfo(new AlgorithmIdentifier(RosstandartObjectIdentifiers.id_tc26_gost_3410_12_256), certificate.SignAlg_Cert.PublicKey_SignAlg)));
 
-            ISignatureFactory factory = new Asn1SignatureFactory("GOST3411withECGOST3410", kp.Private, new SecureRandom());
-            X509Certificate x509 = certGen.Generate(factory);
+            if (rootCert == null)
+            {
+                certGen.AddExtension(X509Extensions.AuthorityKeyIdentifier, true, new AuthorityKeyIdentifierStructure(kp.Public));
+                certGen.AddExtension(X509Extensions.SubjectKeyIdentifier, false, new SubjectKeyIdentifierStructure(kp.Public));
 
-            return x509;
+                ISignatureFactory factory = new Asn1SignatureFactory("GOST3411withECGOST3410", kp.Private, new SecureRandom());
+                X509Certificate x509 = certGen.Generate(factory);
+
+                return x509;
+            }
+            else
+            {
+                certGen.AddExtension(X509Extensions.AuthorityKeyIdentifier, true, new AuthorityKeyIdentifierStructure(rootCert.GetPublicKey()));
+                certGen.AddExtension(X509Extensions.SubjectKeyIdentifier, false, new SubjectKeyIdentifierStructure(kp.Public));
+
+                ISignatureFactory factory = new Asn1SignatureFactory("GOST3411withECGOST3410", PrivateKeyFactory.CreateKey(CreateDatabaseInfoFromCertificate(rootCert).SignAlg_Cert.PrivateKey_SignAlg), new SecureRandom());
+                X509Certificate x509 = certGen.Generate(factory);
+
+                return x509;
+            }
         }
 
         private static Cert CreateDatabaseInfoFromCertificate(X509Certificate cert)
