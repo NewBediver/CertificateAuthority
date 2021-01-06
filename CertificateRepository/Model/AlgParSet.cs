@@ -9,7 +9,6 @@ namespace CertificateRepository.Model
         [Key]
         public int ID_AlgParSet_PK { get; set; }
         public string OID_AlgParSet { get; set; }
-        public byte[] Data_AlgParSet { get; set; }
 
         public int ID_HashType_FK { get; set; }
         [ForeignKey("ID_HashType_FK")]

@@ -227,7 +227,11 @@ namespace CertificateAuthority.BehaviourForms
                 DebugRichTextBox.Text += "Error occured in user SNILS!" + Environment.NewLine;
             }
 
-            m_AlgParSet = DatabaseInstance.GetInstance().AlgParSets.FirstOrDefault(elm => elm.OID_AlgParSet == GetParametersOID());
+            m_AlgParSet = DatabaseInstance.GetInstance().AlgParSets
+                .Include(elm => elm.AlgName_AlgParSet)
+                .Include(elm => elm.HashType_AlgParSet)
+                .Include(elm => elm.Len_AlgParSet)
+                .FirstOrDefault(elm => elm.OID_AlgParSet == GetParametersOID());
             if (m_AlgParSet== null)
             {
                 hasError = true;

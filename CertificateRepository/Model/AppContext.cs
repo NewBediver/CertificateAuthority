@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CertificateRepository.Model
 {
-    public class ApplicationContext
+    public class AppContext
         : DbContext
     {
         public DbSet<AlgName> AlgNames { get; set; }
@@ -23,7 +20,7 @@ namespace CertificateRepository.Model
         public DbSet<Subj> Subjs { get; set; }
         public DbSet<Ver> Vers { get; set; }
 
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+        public AppContext(DbContextOptions<AppContext> options)
             : base(options)
         {
             Database.EnsureCreated();

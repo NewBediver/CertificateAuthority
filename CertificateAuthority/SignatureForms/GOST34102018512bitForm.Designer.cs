@@ -31,7 +31,7 @@
             this.ResultRichTextBox = new System.Windows.Forms.RichTextBox();
             this.VerifySignatureButton = new System.Windows.Forms.Button();
             this.CalculateSignatureButton = new System.Windows.Forms.Button();
-            this.GOST34102018RadioButton = new System.Windows.Forms.RadioButton();
+            this.C512RadioButton = new System.Windows.Forms.RadioButton();
             this.B512RadioButton = new System.Windows.Forms.RadioButton();
             this.A512RadioButton = new System.Windows.Forms.RadioButton();
             this.MessageTextBox = new System.Windows.Forms.RichTextBox();
@@ -55,18 +55,20 @@
             // 
             // ResultRichTextBox
             // 
-            this.ResultRichTextBox.Location = new System.Drawing.Point(7, 23);
+            this.ResultRichTextBox.Location = new System.Drawing.Point(10, 38);
+            this.ResultRichTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ResultRichTextBox.Name = "ResultRichTextBox";
             this.ResultRichTextBox.ReadOnly = true;
-            this.ResultRichTextBox.Size = new System.Drawing.Size(227, 67);
+            this.ResultRichTextBox.Size = new System.Drawing.Size(323, 152);
             this.ResultRichTextBox.TabIndex = 0;
             this.ResultRichTextBox.Text = "";
             // 
             // VerifySignatureButton
             // 
-            this.VerifySignatureButton.Location = new System.Drawing.Point(13, 263);
+            this.VerifySignatureButton.Location = new System.Drawing.Point(20, 399);
+            this.VerifySignatureButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.VerifySignatureButton.Name = "VerifySignatureButton";
-            this.VerifySignatureButton.Size = new System.Drawing.Size(246, 26);
+            this.VerifySignatureButton.Size = new System.Drawing.Size(351, 43);
             this.VerifySignatureButton.TabIndex = 7;
             this.VerifySignatureButton.Text = "Verify Signature";
             this.VerifySignatureButton.UseVisualStyleBackColor = true;
@@ -74,31 +76,34 @@
             // 
             // CalculateSignatureButton
             // 
-            this.CalculateSignatureButton.Location = new System.Drawing.Point(13, 295);
+            this.CalculateSignatureButton.Location = new System.Drawing.Point(20, 452);
+            this.CalculateSignatureButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.CalculateSignatureButton.Name = "CalculateSignatureButton";
-            this.CalculateSignatureButton.Size = new System.Drawing.Size(246, 26);
+            this.CalculateSignatureButton.Size = new System.Drawing.Size(351, 43);
             this.CalculateSignatureButton.TabIndex = 5;
             this.CalculateSignatureButton.Text = "Calculate Signature";
             this.CalculateSignatureButton.UseVisualStyleBackColor = true;
             this.CalculateSignatureButton.Click += new System.EventHandler(this.CalculateSignatureButton_Click);
             // 
-            // GOST34102018RadioButton
+            // C512RadioButton
             // 
-            this.GOST34102018RadioButton.AutoSize = true;
-            this.GOST34102018RadioButton.Location = new System.Drawing.Point(6, 73);
-            this.GOST34102018RadioButton.Name = "GOST34102018RadioButton";
-            this.GOST34102018RadioButton.Size = new System.Drawing.Size(161, 19);
-            this.GOST34102018RadioButton.TabIndex = 3;
-            this.GOST34102018RadioButton.TabStop = true;
-            this.GOST34102018RadioButton.Text = "GOST 34.10-2018 Example";
-            this.GOST34102018RadioButton.UseVisualStyleBackColor = true;
+            this.C512RadioButton.AutoSize = true;
+            this.C512RadioButton.Location = new System.Drawing.Point(9, 122);
+            this.C512RadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.C512RadioButton.Name = "C512RadioButton";
+            this.C512RadioButton.Size = new System.Drawing.Size(341, 29);
+            this.C512RadioButton.TabIndex = 3;
+            this.C512RadioButton.TabStop = true;
+            this.C512RadioButton.Text = "id-tc26-gost-3410-12-512-paramSetC";
+            this.C512RadioButton.UseVisualStyleBackColor = true;
             // 
             // B512RadioButton
             // 
             this.B512RadioButton.AutoSize = true;
-            this.B512RadioButton.Location = new System.Drawing.Point(6, 48);
+            this.B512RadioButton.Location = new System.Drawing.Point(9, 80);
+            this.B512RadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.B512RadioButton.Name = "B512RadioButton";
-            this.B512RadioButton.Size = new System.Drawing.Size(221, 19);
+            this.B512RadioButton.Size = new System.Drawing.Size(340, 29);
             this.B512RadioButton.TabIndex = 1;
             this.B512RadioButton.TabStop = true;
             this.B512RadioButton.Text = "id-tc26-gost-3410-12-512-paramSetB";
@@ -107,9 +112,10 @@
             // A512RadioButton
             // 
             this.A512RadioButton.AutoSize = true;
-            this.A512RadioButton.Location = new System.Drawing.Point(6, 23);
+            this.A512RadioButton.Location = new System.Drawing.Point(9, 38);
+            this.A512RadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.A512RadioButton.Name = "A512RadioButton";
-            this.A512RadioButton.Size = new System.Drawing.Size(222, 19);
+            this.A512RadioButton.Size = new System.Drawing.Size(342, 29);
             this.A512RadioButton.TabIndex = 0;
             this.A512RadioButton.TabStop = true;
             this.A512RadioButton.Text = "id-tc26-gost-3410-12-512-paramSetA";
@@ -117,25 +123,28 @@
             // 
             // MessageTextBox
             // 
-            this.MessageTextBox.Location = new System.Drawing.Point(6, 23);
+            this.MessageTextBox.Location = new System.Drawing.Point(9, 38);
+            this.MessageTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MessageTextBox.Name = "MessageTextBox";
-            this.MessageTextBox.Size = new System.Drawing.Size(495, 261);
+            this.MessageTextBox.Size = new System.Drawing.Size(705, 432);
             this.MessageTextBox.TabIndex = 0;
             this.MessageTextBox.Text = "";
             // 
             // DigitalSignatureTextBox
             // 
-            this.DigitalSignatureTextBox.Location = new System.Drawing.Point(6, 23);
+            this.DigitalSignatureTextBox.Location = new System.Drawing.Point(9, 38);
+            this.DigitalSignatureTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DigitalSignatureTextBox.Name = "DigitalSignatureTextBox";
-            this.DigitalSignatureTextBox.Size = new System.Drawing.Size(747, 88);
+            this.DigitalSignatureTextBox.Size = new System.Drawing.Size(1065, 144);
             this.DigitalSignatureTextBox.TabIndex = 0;
             this.DigitalSignatureTextBox.Text = "";
             // 
             // GenerateKeys
             // 
-            this.GenerateKeys.Location = new System.Drawing.Point(684, 12);
+            this.GenerateKeys.Location = new System.Drawing.Point(977, 20);
+            this.GenerateKeys.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.GenerateKeys.Name = "GenerateKeys";
-            this.GenerateKeys.Size = new System.Drawing.Size(88, 117);
+            this.GenerateKeys.Size = new System.Drawing.Size(126, 195);
             this.GenerateKeys.TabIndex = 2;
             this.GenerateKeys.Text = "Generate";
             this.GenerateKeys.UseVisualStyleBackColor = true;
@@ -143,36 +152,42 @@
             // 
             // PrivateKeyTextBox
             // 
-            this.PrivateKeyTextBox.Location = new System.Drawing.Point(6, 22);
+            this.PrivateKeyTextBox.Location = new System.Drawing.Point(9, 37);
+            this.PrivateKeyTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PrivateKeyTextBox.Name = "PrivateKeyTextBox";
-            this.PrivateKeyTextBox.Size = new System.Drawing.Size(652, 23);
+            this.PrivateKeyTextBox.Size = new System.Drawing.Size(930, 31);
             this.PrivateKeyTextBox.TabIndex = 0;
             // 
             // PublicKeyTextBox
             // 
-            this.PublicKeyTextBox.Location = new System.Drawing.Point(6, 22);
+            this.PublicKeyTextBox.Location = new System.Drawing.Point(9, 37);
+            this.PublicKeyTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PublicKeyTextBox.Name = "PublicKeyTextBox";
-            this.PublicKeyTextBox.Size = new System.Drawing.Size(652, 23);
+            this.PublicKeyTextBox.Size = new System.Drawing.Size(930, 31);
             this.PublicKeyTextBox.TabIndex = 0;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.ResultRichTextBox);
-            this.groupBox1.Location = new System.Drawing.Point(13, 328);
+            this.groupBox1.Location = new System.Drawing.Point(19, 505);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(240, 97);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(343, 204);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Result";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.GOST34102018RadioButton);
+            this.groupBox2.Controls.Add(this.C512RadioButton);
             this.groupBox2.Controls.Add(this.B512RadioButton);
             this.groupBox2.Controls.Add(this.A512RadioButton);
-            this.groupBox2.Location = new System.Drawing.Point(13, 136);
+            this.groupBox2.Location = new System.Drawing.Point(19, 227);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(246, 97);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox2.Size = new System.Drawing.Size(351, 162);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Elliptical Curve parameters set";
@@ -180,9 +195,11 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.MessageTextBox);
-            this.groupBox3.Location = new System.Drawing.Point(265, 135);
+            this.groupBox3.Location = new System.Drawing.Point(379, 225);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(507, 290);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox3.Size = new System.Drawing.Size(724, 483);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Message";
@@ -190,9 +207,11 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.DigitalSignatureTextBox);
-            this.groupBox4.Location = new System.Drawing.Point(13, 431);
+            this.groupBox4.Location = new System.Drawing.Point(19, 718);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(759, 117);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox4.Size = new System.Drawing.Size(1084, 195);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Digital Signature (hex)";
@@ -200,9 +219,11 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.PrivateKeyTextBox);
-            this.groupBox5.Location = new System.Drawing.Point(13, 73);
+            this.groupBox5.Location = new System.Drawing.Point(19, 122);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(664, 56);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox5.Size = new System.Drawing.Size(949, 93);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Private Key (hex)";
@@ -210,18 +231,20 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.PublicKeyTextBox);
-            this.groupBox6.Location = new System.Drawing.Point(13, 12);
+            this.groupBox6.Location = new System.Drawing.Point(19, 20);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(664, 54);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox6.Size = new System.Drawing.Size(949, 90);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Public Key (hex)";
             // 
             // GOST34102018512bitForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(1120, 935);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -232,6 +255,7 @@
             this.Controls.Add(this.CalculateSignatureButton);
             this.Controls.Add(this.VerifySignatureButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "GOST34102018512bitForm";
             this.Text = "Digital Signature with GOST 34.10-2018 512 bit";
             this.groupBox1.ResumeLayout(false);
@@ -252,7 +276,7 @@
         private System.Windows.Forms.RichTextBox ResultRichTextBox;
         private System.Windows.Forms.Button VerifySignatureButton;
         private System.Windows.Forms.Button CalculateSignatureButton;
-        private System.Windows.Forms.RadioButton GOST34102018RadioButton;
+        private System.Windows.Forms.RadioButton C512RadioButton;
         private System.Windows.Forms.RadioButton B512RadioButton;
         private System.Windows.Forms.RadioButton A512RadioButton;
         private System.Windows.Forms.RichTextBox MessageTextBox;

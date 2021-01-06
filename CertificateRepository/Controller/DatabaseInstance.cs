@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CertificateRepository.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
@@ -6,7 +7,7 @@ namespace CertificateRepository.Controller
 {
     public class DatabaseInstance
     {
-        public static Model.ApplicationContext GetInstance()
+        public static AppContext GetInstance()
         {
             if (m_Db == null)
             {
@@ -16,17 +17,17 @@ namespace CertificateRepository.Controller
                 var config = builder.Build();
                 string connectionString = config.GetConnectionString("DefaultConnection");
 
-                var optionsBuilder = new DbContextOptionsBuilder<Model.ApplicationContext>();
+                var optionsBuilder = new DbContextOptionsBuilder<AppContext>();
                 var options = optionsBuilder
                     .UseSqlServer(connectionString)
                     .Options;
 
-                m_Db = new Model.ApplicationContext(options);
+                m_Db = new AppContext(options);
             }
 
             return m_Db;
         }
 
-        private static Model.ApplicationContext m_Db;
+        private static AppContext m_Db;
     }
 }

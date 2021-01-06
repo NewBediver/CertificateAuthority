@@ -1,23 +1,25 @@
 ﻿using CertificateAuthority.SignatureForms;
 using CertificateRepository.Controller;
 using CertificateRepository.Model;
-using DigitalSignature.Implementations;
-using DigitalSignature.Utility.Elliptical;
-using HashCryptography;
-using HashCryptography.Implementation;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1;
+using Org.BouncyCastle.Asn1.CryptoPro;
+using Org.BouncyCastle.Asn1.Rosstandart;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Operators;
+using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Pkcs;
 using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Security.Certificates;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.X509;
 using Org.BouncyCastle.X509.Extension;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -32,12 +34,10 @@ namespace CertificateAuthority.Components
 
             Cert certificate = new Cert();
             certificate.Ver_Cert = DatabaseInstance.GetInstance().Vers.FirstOrDefault();
-            var keys = GenerateKeyPair(DatabaseInstance.GetInstance().AlgParSets
-                .Include(elm => elm.Len_AlgParSet)
-                .FirstOrDefault(elm => elm.OID_AlgParSet == "1.2.643.7.1.2.1.1.1"));
+            var keys = GenerateKeyPair(parameters);
             certificate.SignAlg_Cert = new SignAlg
             {
-                AlgParSet_SignAlg = DatabaseInstance.GetInstance().AlgParSets.FirstOrDefault(elm => elm.OID_AlgParSet == "1.2.643.7.1.2.1.1.1"),
+                AlgParSet_SignAlg = parameters,
                 PrivateKey_SignAlg = PrivateKeyInfoFactory.CreatePrivateKeyInfo(keys.Private).ToAsn1Object().GetEncoded(),
                 PublicKey_SignAlg = SubjectPublicKeyInfoFactory.CreateSubjectPublicKeyInfo(keys.Public).ToAsn1Object().GetEncoded()
             };
@@ -144,103 +144,115 @@ namespace CertificateAuthority.Components
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    ECKeyPairGenerator gen = new ECKeyPairGenerator();
+                    var parametersObject = GetDigitalSignatureAlgoParameterSetOID(parameters);
+                    var ecp = new ECNamedDomainParameters(parametersObject, ECGost3410NamedCurves.GetByOidX9(parametersObject));
+                    var gostParams = new ECGost3410Parameters(ecp, parametersObject, GetDigitalSignatureAlgoOID(parameters), null);
                     SecureRandom rand = new SecureRandom();
                     rand.SetSeed(form.Seed.ToArray());
-                    KeyGenerationParameters keyGenParam = new KeyGenerationParameters(rand, parameters.Len_AlgParSet.Value_Len);
-                    gen.Init(keyGenParam);
+                    var pars = new ECKeyGenerationParameters(gostParams, rand);
+                    var generator = new ECKeyPairGenerator();
+                    generator.Init(pars);
 
-                    return gen.GenerateKeyPair();
+                    return generator.GenerateKeyPair();
                 }
             }
         }
 
-        private static DigitalSignature.DigitalSignature GetDigitalSignatureAlgo(AlgParSet parameters)
+        private static DerObjectIdentifier GetDigitalSignatureAlgoOID(AlgParSet parameters)
         {
             return parameters.Len_AlgParSet.Value_Len switch
             {
-                256 => new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.GetIDFromOID(parameters.OID_AlgParSet)))),
-                512 => new DigitalSignature.DigitalSignature(new GOST34102018Policy512bit(new ParameterSet(ParameterSet.GetIDFromOID(parameters.OID_AlgParSet)))),
+                256 => RosstandartObjectIdentifiers.id_tc26_gost_3410_12_256,
+                512 => RosstandartObjectIdentifiers.id_tc26_gost_3410_12_512,
                 _ => throw new Exception("Wrong parameters length!"),
             };
         }
 
-        private static HashFunction GetHashAlgo(AlgParSet parameters)
+        private static DerObjectIdentifier GetHashAlgoOID(AlgParSet parameters)
         {
             return parameters.Len_AlgParSet.Value_Len switch
             {
-                256 => new HashFunction(new GOST34112018Policy256bit()),
-                512 => new HashFunction(new GOST34112018Policy512bit()),
+                256 => RosstandartObjectIdentifiers.id_tc26_gost_3411_12_256,
+                512 => RosstandartObjectIdentifiers.id_tc26_gost_3411_12_512,
                 _ => throw new Exception("Wrong parameters length!"),
             };
+        }
+
+        private static DerObjectIdentifier GetDigitalSignatureAlgoParameterSetOID(AlgParSet parameters)
+        {
+            if (parameters.OID_AlgParSet == "1.2.643.7.1.2.1.2.1") return RosstandartObjectIdentifiers.id_tc26_gost_3410_12_512_paramSetA;
+            else if (parameters.OID_AlgParSet == "1.2.643.7.1.2.1.2.2") return RosstandartObjectIdentifiers.id_tc26_gost_3410_12_512_paramSetB;
+            else if (parameters.OID_AlgParSet == "1.2.643.7.1.2.1.2.3") return RosstandartObjectIdentifiers.id_tc26_gost_3410_12_512_paramSetC;
+            else if (parameters.OID_AlgParSet == "1.2.643.7.1.2.1.1.1") return RosstandartObjectIdentifiers.id_tc26_gost_3410_12_256_paramSetA;
+            else if (parameters.OID_AlgParSet == "1.2.643.7.1.2.1.1.2") return RosstandartObjectIdentifiers.id_tc26_gost_3410_12_256_paramSetA/*B*/;
+            else if (parameters.OID_AlgParSet == "1.2.643.7.1.2.1.1.3") return RosstandartObjectIdentifiers.id_tc26_gost_3410_12_256_paramSetA/*C*/;
+            else if (parameters.OID_AlgParSet == "1.2.643.7.1.2.1.1.4") return RosstandartObjectIdentifiers.id_tc26_gost_3410_12_256_paramSetA/*D*/;
+
+            throw new Exception("Wrong parameters OID!");
         }
 
         private static X509Certificate CreateCertificateFromDatabaseInfo(Cert certificate)
         {
+            #region Issuer Attributes
             IList issuerAttrs = new ArrayList();
             issuerAttrs.Add(certificate.Issuer_Cert.Name_Issuer);
             issuerAttrs.Add(certificate.Issuer_Cert.Phone_Issuer);
             issuerAttrs.Add(certificate.Issuer_Cert.EMail_Issuer);
             issuerAttrs.Add(certificate.Issuer_Cert.City_Issuer.Region_City.Country_Region.Name_Country);
-            /*issuerAttrs["CITY"] = certificate.Issuer_Cert.City_Issuer.Name_City;
-            issuerAttrs["OGRN"] = certificate.Issuer_Cert.OGRN_Issuer;
-            issuerAttrs["INN"] = certificate.Issuer_Cert.INN_Issuer;
-            issuerAttrs["KPP"] = certificate.Issuer_Cert.KPP_Issuer;
-            issuerAttrs["CheckingAcc"] = certificate.Issuer_Cert.CheckingAcc_Issuer;
-            issuerAttrs["BIK"] = certificate.Issuer_Cert.BIK_Issuer;
-            issuerAttrs["OKTMO"] = certificate.Issuer_Cert.OKTMO_Issuer;
-            issuerAttrs["KBK"] = certificate.Issuer_Cert.KBK_Issuer;*/
+            issuerAttrs.Add(certificate.Issuer_Cert.OGRN_Issuer);
+            issuerAttrs.Add(certificate.Issuer_Cert.INN_Issuer);
 
             IList issuerOrd = new ArrayList();
             issuerOrd.Add(X509Name.CN);
             issuerOrd.Add(X509Name.T);
             issuerOrd.Add(X509Name.E);
             issuerOrd.Add(X509Name.C);
-            /*issuerOrd.Add(new DerObjectIdentifier("CITY"));
-            issuerOrd.Add(new DerObjectIdentifier("OGRN"));
-            issuerOrd.Add(new DerObjectIdentifier("INN"));
-            issuerOrd.Add(new DerObjectIdentifier("KPP"));
-            issuerOrd.Add(new DerObjectIdentifier("CheckingAcc"));
-            issuerOrd.Add(new DerObjectIdentifier("BIK"));
-            issuerOrd.Add(new DerObjectIdentifier("OKTMO"));
-            issuerOrd.Add(new DerObjectIdentifier("KBK"));*/
+            // OGRN
+            issuerOrd.Add(new DerObjectIdentifier("1.2.643.100.1"));
+            // INN
+            issuerOrd.Add(new DerObjectIdentifier("1.2.643.3.131.1.1"));
+            #endregion
 
+            #region Subject attributes
             IList subjAttrs = new ArrayList();
-            subjAttrs.Add(certificate.Subj_Cert.Name_Subj + " " + certificate.Subj_Cert.Surname_Subj);
-            subjAttrs.Add(certificate.Subj_Cert.BirthDate_Subj.ToString("yyyyMMddHHmmssZ"));
-            subjAttrs.Add(certificate.Subj_Cert.Gender_Subj.Name_Gender);
-            subjAttrs.Add(certificate.Subj_Cert.Citizen_Subj.Name_Citizen);
+            subjAttrs.Add(certificate.Subj_Cert.Name_Subj + (certificate.Subj_Cert.Surname_Subj != string.Empty ? " " + certificate.Subj_Cert.Surname_Subj : ""));
             subjAttrs.Add(certificate.Subj_Cert.City_Subj.Region_City.Country_Region.Name_Country);
-            //subjAttrs["CITY"] = certificate.Subj_Cert.Name_Subj;
             subjAttrs.Add(certificate.Subj_Cert.Phone_Subj);
             subjAttrs.Add(certificate.Subj_Cert.EMail_Subj);
-            subjAttrs.Add(certificate.Subj_Cert.PassportSerias_Subj + " " + certificate.Subj_Cert.PassportNumber_Subj);
-            /*subjAttrs["INN"] = certificate.Subj_Cert.INN_Subj;
-            subjAttrs["SNILS"] = certificate.Subj_Cert.SNILS_Subj;*/
+            subjAttrs.Add(certificate.Subj_Cert.INN_Subj);
 
             IList subjOrd = new ArrayList();
             subjOrd.Add(X509Name.CN);
-            subjOrd.Add(X509Name.DateOfBirth);
-            subjOrd.Add(X509Name.Gender);
-            subjOrd.Add(X509Name.CountryOfCitizenship);
             subjOrd.Add(X509Name.C);
-            //subjOrd.Add(new DerObjectIdentifier("CITY"));
             subjOrd.Add(X509Name.T);
             subjOrd.Add(X509Name.E);
-            subjOrd.Add(X509Name.SerialNumber);
-            /*subjOrd.Add(new DerObjectIdentifier("INN"));
-            subjOrd.Add(new DerObjectIdentifier("SNILS"));*/
-
-            AsymmetricCipherKeyPair kp = new AsymmetricCipherKeyPair(
-                PublicKeyFactory.CreateKey(certificate.SignAlg_Cert.PublicKey_SignAlg),
-                PrivateKeyFactory.CreateKey(certificate.SignAlg_Cert.PrivateKey_SignAlg)
-            );
+            // INN
+            subjOrd.Add(new DerObjectIdentifier("1.2.643.3.131.1.1"));
+            #endregion
 
             X509Certificate rootCert = null;
             if (certificate.Issuer_Cert.Name_Issuer != certificate.Subj_Cert.Name_Subj)
             {
                 rootCert = new X509CertificateParser().ReadCertificate(GetRootCertificate());
+
+                subjAttrs.Add(certificate.Subj_Cert.BirthDate_Subj.ToString("yyyyMMddHHmmssZ"));
+                subjAttrs.Add(certificate.Subj_Cert.Gender_Subj.Name_Gender);
+                subjAttrs.Add(certificate.Subj_Cert.Citizen_Subj.Name_Citizen);
+                subjAttrs.Add(certificate.Subj_Cert.PassportSerias_Subj + " " + certificate.Subj_Cert.PassportNumber_Subj);
+                subjAttrs.Add(certificate.Subj_Cert.SNILS_Subj);
+
+                subjOrd.Add(X509Name.DateOfBirth);
+                subjOrd.Add(X509Name.Gender);
+                subjOrd.Add(X509Name.CountryOfCitizenship);
+                subjOrd.Add(X509Name.SerialNumber);
+                // SNILS
+                subjOrd.Add(new DerObjectIdentifier("1.2.643.100.3"));
             }
+
+            AsymmetricCipherKeyPair kp = new AsymmetricCipherKeyPair(
+                PublicKeyFactory.CreateKey(certificate.SignAlg_Cert.PublicKey_SignAlg),
+                PrivateKeyFactory.CreateKey(certificate.SignAlg_Cert.PrivateKey_SignAlg)
+            );
 
             X509V3CertificateGenerator certGen = new X509V3CertificateGenerator();
             certGen.SetSerialNumber(new BigInteger(certificate.SerialNumber_Cert));
@@ -252,6 +264,7 @@ namespace CertificateAuthority.Components
 
             if (rootCert == null)
             {
+                certGen.AddExtension(X509Extensions.BasicConstraints, true, new BasicConstraints(true));
                 certGen.AddExtension(X509Extensions.AuthorityKeyIdentifier, true, new AuthorityKeyIdentifierStructure(kp.Public));
                 certGen.AddExtension(X509Extensions.SubjectKeyIdentifier, false, new SubjectKeyIdentifierStructure(kp.Public));
 
@@ -262,6 +275,7 @@ namespace CertificateAuthority.Components
             }
             else
             {
+                certGen.AddExtension(X509Extensions.BasicConstraints, true, new BasicConstraints(false));
                 certGen.AddExtension(X509Extensions.AuthorityKeyIdentifier, true, new AuthorityKeyIdentifierStructure(rootCert.GetPublicKey()));
                 certGen.AddExtension(X509Extensions.SubjectKeyIdentifier, false, new SubjectKeyIdentifierStructure(kp.Public));
 

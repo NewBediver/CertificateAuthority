@@ -13,7 +13,7 @@ namespace CertificateAuthority.SignatureForms
         public GOST34102018256bitForm()
         {
             InitializeComponent();
-            GOST34102018RadioButton.Checked = true;
+            A256RadioButton.Checked = true;
         }
 
         private void VerifySignatureButton_Click(object sender, EventArgs e)
@@ -81,34 +81,36 @@ namespace CertificateAuthority.SignatureForms
 
         private void GenerateKeys_Click(object sender, EventArgs e)
         {
-            using (var form = new KeyGenerationForm())
+            using var form = new KeyGenerationForm();
+            var result = form.ShowDialog();
+            if (result == DialogResult.OK)
             {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    var signature = GetDigitalSignatureAlgo();
+                var signature = GetDigitalSignatureAlgo();
 
-                    var priv = signature.GeneratePrivateKey(
-                          Convert.ToInt32(form.Seed[0])
-                        + Convert.ToInt32(form.Seed[1] << 8)
-                        + Convert.ToInt32(form.Seed[2] << 16)
-                        + Convert.ToInt32(form.Seed[3] << 24)
-                    );
-                    var pub = signature.GeneratePublicKey(priv);
+                var priv = signature.GeneratePrivateKey(
+                      Convert.ToInt32(form.Seed[0])
+                    + Convert.ToInt32(form.Seed[1] << 8)
+                    + Convert.ToInt32(form.Seed[2] << 16)
+                    + Convert.ToInt32(form.Seed[3] << 24)
+                );
+                var pub = signature.GeneratePublicKey(priv);
 
-                    PublicKeyTextBox.Text = string.Join("", BitConverter.ToString(pub).Split('-'));
-                    PrivateKeyTextBox.Text = string.Join("", BitConverter.ToString(priv).Split('-'));
-                }
-                else
-                {
-                    ResultRichTextBox.Text = "You closed the form too early!";
-                }
+                PublicKeyTextBox.Text = string.Join("", BitConverter.ToString(pub).Split('-'));
+                PrivateKeyTextBox.Text = string.Join("", BitConverter.ToString(priv).Split('-'));
+            }
+            else
+            {
+                ResultRichTextBox.Text = "You closed the form too early!";
             }
         }
 
         private DigitalSignature.DigitalSignature GetDigitalSignatureAlgo()
         {
-            if (B256RadioButton.Checked)
+            if (A256RadioButton.Checked)
+            {
+                return new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetA256)));
+            }
+            else if (B256RadioButton.Checked)
             {
                 return new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetB256)));
             }
@@ -119,10 +121,6 @@ namespace CertificateAuthority.SignatureForms
             else if (D256RadioButton.Checked)
             {
                 return new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetD256)));
-            }
-            else if (GOST34102018RadioButton.Checked)
-            {
-                return new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.ID.ParamSetGOST34102018256bit)));
             }
             else
             {
