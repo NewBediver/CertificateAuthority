@@ -7,6 +7,7 @@ namespace CertificateRepository.Model
     {
         public DbSet<AlgName> AlgNames { get; set; }
         public DbSet<AlgParSet> AlgParSets { get; set; }
+        public DbSet<CancelledCert> CancelledCerts { get; set; }
         public DbSet<Cert> Certs { get; set; }
         public DbSet<Citizen> Citizens { get; set; }
         public DbSet<City> Cities { get; set; }

@@ -1,6 +1,10 @@
 ﻿using CertificateAuthority.SignatureForms;
 using CertificateRepository.Controller;
 using CertificateRepository.Model;
+using DigitalSignature.Implementations;
+using DigitalSignature.Utility.Elliptical;
+using HashCryptography;
+using HashCryptography.Implementation;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.CryptoPro;
@@ -19,7 +23,6 @@ using Org.BouncyCastle.X509;
 using Org.BouncyCastle.X509.Extension;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -32,25 +35,30 @@ namespace CertificateAuthority.Components
             X509Certificate root = new X509CertificateParser().ReadCertificate(GetRootCertificate());
             Cert data = CreateDatabaseInfoFromCertificate(root);
 
-            Cert certificate = new Cert();
-            certificate.Ver_Cert = DatabaseInstance.GetInstance().Vers.FirstOrDefault();
             var keys = GenerateKeyPair(parameters);
-            certificate.SignAlg_Cert = new SignAlg
-            {
-                AlgParSet_SignAlg = parameters,
-                PrivateKey_SignAlg = PrivateKeyInfoFactory.CreatePrivateKeyInfo(keys.Private).ToAsn1Object().GetEncoded(),
-                PublicKey_SignAlg = SubjectPublicKeyInfoFactory.CreateSubjectPublicKeyInfo(keys.Public).ToAsn1Object().GetEncoded()
-            };
-            certificate.Issuer_Cert = data.Issuer_Cert;
-            certificate.Subj_Cert = subj;
+            string serial = string.Empty;
             do
             {
-                certificate.SerialNumber_Cert = BigIntegers.CreateRandomBigInteger(512, new SecureRandom()).ToString();
+                serial = BigIntegers.CreateRandomBigInteger(512, new SecureRandom()).ToString();
             }
-            while (DatabaseInstance.GetInstance().Certs.FirstOrDefault(elm => elm.SerialNumber_Cert == certificate.SerialNumber_Cert) != null);
-            certificate.ValidFrom_Cert = DateTime.Now;
-            certificate.ValidBy_Cert = DateTimeOffset.Now.AddYears(5).UtcDateTime;
-            certificate.SignSerialNumber_Cert = data.SerialNumber_Cert;
+            while (DatabaseInstance.GetInstance().Certs.FirstOrDefault(elm => elm.SerialNumber_Cert == serial) != null);
+
+            Cert certificate = new Cert
+            {
+                Ver_Cert = DatabaseInstance.GetInstance().Vers.FirstOrDefault(),
+                SignAlg_Cert = new SignAlg
+                {
+                    AlgParSet_SignAlg = parameters,
+                    PrivateKey_SignAlg = PrivateKeyInfoFactory.CreatePrivateKeyInfo(keys.Private).ToAsn1Object().GetEncoded(),
+                    PublicKey_SignAlg = SubjectPublicKeyInfoFactory.CreateSubjectPublicKeyInfo(keys.Public).ToAsn1Object().GetEncoded()
+                },
+                Issuer_Cert = data.Issuer_Cert,
+                Subj_Cert = subj,
+                SerialNumber_Cert = serial,
+                ValidFrom_Cert = DateTime.Now,
+                ValidBy_Cert = DateTimeOffset.Now.AddYears(5).UtcDateTime,
+                SignSerialNumber_Cert = data.SerialNumber_Cert
+            };
 
             var cert = CreateCertificateFromDatabaseInfo(certificate);
             certificate.SignValue_Cert = string.Join("", BitConverter.ToString(cert.GetSignature()).Split('-'));
@@ -78,44 +86,53 @@ namespace CertificateAuthority.Components
                 .Include(elm => elm.Subj_Cert).ThenInclude(elm => elm.Citizen_Subj)
                 .Include(elm => elm.Subj_Cert).ThenInclude(elm => elm.City_Subj).ThenInclude(elm => elm.Region_City).ThenInclude(elm => elm.Country_Region)
                 .Include(elm => elm.Issuer_Cert).ThenInclude(elm => elm.City_Issuer).ThenInclude(elm => elm.Region_City).ThenInclude(elm => elm.Country_Region)
-                .FirstOrDefault(elm => elm.Issuer_Cert == certificationAuthority && elm.Subj_Cert.Name_Subj == certificationAuthority.Name_Issuer);
-            if (certificate == null)
+                .FirstOrDefault(elm => elm.SerialNumber_Cert == elm.SignSerialNumber_Cert);
+
+            if (certificate == null || !IsValid(CreateCertificateFromDatabaseInfo(certificate).GetEncoded()))
             {
-                certificate = new Cert();
-                certificate.Ver_Cert = DatabaseInstance.GetInstance().Vers.FirstOrDefault();
-                var keys = GenerateKeyPair(DatabaseInstance.GetInstance().AlgParSets
+                var par = DatabaseInstance.GetInstance().AlgParSets
                     .Include(elm => elm.Len_AlgParSet)
-                    .FirstOrDefault(elm => elm.OID_AlgParSet == "1.2.643.7.1.2.1.1.1"));
-                certificate.SignAlg_Cert = new SignAlg
-                {
-                    AlgParSet_SignAlg = DatabaseInstance.GetInstance().AlgParSets.FirstOrDefault(elm => elm.OID_AlgParSet == "1.2.643.7.1.2.1.1.1"),
-                    PrivateKey_SignAlg = PrivateKeyInfoFactory.CreatePrivateKeyInfo(keys.Private).ToAsn1Object().GetEncoded(),
-                    PublicKey_SignAlg = SubjectPublicKeyInfoFactory.CreateSubjectPublicKeyInfo(keys.Public).ToAsn1Object().GetEncoded()
-                };
-                certificate.Issuer_Cert = certificationAuthority;
-                certificate.Subj_Cert = new Subj
-                {
-                    Surname_Subj = "",
-                    Name_Subj = certificationAuthority.Name_Issuer,
-                    BirthDate_Subj = DateTime.Now,
-                    Gender_Subj = DatabaseInstance.GetInstance().Genders.FirstOrDefault(),
-                    Citizen_Subj = DatabaseInstance.GetInstance().Citizens.FirstOrDefault(),
-                    City_Subj = certificationAuthority.City_Issuer,
-                    Phone_Subj = certificationAuthority.Phone_Issuer,
-                    EMail_Subj = certificationAuthority.EMail_Issuer,
-                    PassportSerias_Subj = "",
-                    PassportNumber_Subj = "",
-                    INN_Subj = certificationAuthority.INN_Issuer,
-                    SNILS_Subj = ""
-                };
+                    .Include(elm => elm.AlgName_AlgParSet)
+                    .Include(elm => elm.HashType_AlgParSet)
+                    .FirstOrDefault(elm => elm.Len_AlgParSet.Value_Len == 256);
+                var keys = GenerateKeyPair(par);
+                string serial = string.Empty;
                 do
                 {
-                    certificate.SerialNumber_Cert = BigIntegers.CreateRandomBigInteger(512, new SecureRandom()).ToString();
+                    serial = BigIntegers.CreateRandomBigInteger(512, new SecureRandom()).ToString();
                 }
-                while (DatabaseInstance.GetInstance().Certs.FirstOrDefault(elm => elm.SerialNumber_Cert == certificate.SerialNumber_Cert) != null);
-                certificate.ValidFrom_Cert = DateTime.Now;
-                certificate.ValidBy_Cert = DateTimeOffset.Now.AddYears(5).UtcDateTime;
-                certificate.SignSerialNumber_Cert = "";
+                while (DatabaseInstance.GetInstance().Certs.FirstOrDefault(elm => elm.SerialNumber_Cert == serial) != null);
+
+                certificate = new Cert
+                {
+                    Ver_Cert = DatabaseInstance.GetInstance().Vers.FirstOrDefault(),
+                    SignAlg_Cert = new SignAlg
+                    {
+                        AlgParSet_SignAlg = par,
+                        PrivateKey_SignAlg = PrivateKeyInfoFactory.CreatePrivateKeyInfo(keys.Private).ToAsn1Object().GetEncoded(),
+                        PublicKey_SignAlg = SubjectPublicKeyInfoFactory.CreateSubjectPublicKeyInfo(keys.Public).ToAsn1Object().GetEncoded()
+                    },
+                    Issuer_Cert = certificationAuthority,
+                    Subj_Cert = new Subj
+                    {
+                        Surname_Subj = "",
+                        Name_Subj = certificationAuthority.Name_Issuer,
+                        BirthDate_Subj = DateTime.Now,
+                        Gender_Subj = DatabaseInstance.GetInstance().Genders.FirstOrDefault(),
+                        Citizen_Subj = DatabaseInstance.GetInstance().Citizens.FirstOrDefault(),
+                        City_Subj = certificationAuthority.City_Issuer,
+                        Phone_Subj = certificationAuthority.Phone_Issuer,
+                        EMail_Subj = certificationAuthority.EMail_Issuer,
+                        PassportSerias_Subj = "",
+                        PassportNumber_Subj = "",
+                        INN_Subj = certificationAuthority.INN_Issuer,
+                        SNILS_Subj = ""
+                    },
+                    SerialNumber_Cert = serial,
+                    ValidFrom_Cert = DateTime.Now,
+                    ValidBy_Cert = DateTimeOffset.Now.AddYears(5).UtcDateTime,
+                    SignSerialNumber_Cert = serial
+                };
 
                 var cert = CreateCertificateFromDatabaseInfo(certificate);
                 certificate.SignValue_Cert = string.Join("", BitConverter.ToString(cert.GetSignature()).Split('-'));
@@ -129,11 +146,121 @@ namespace CertificateAuthority.Components
             return CreateCertificateFromDatabaseInfo(certificate).GetEncoded();
         }
 
+        public static bool IsValid(byte[] x509Cert)
+        {
+            X509CertificateParser parser = new X509CertificateParser();
+            X509Certificate cert = parser.ReadCertificate(x509Cert);
+
+            var data = CreateDatabaseInfoFromCertificate(cert);
+            if (data == null || UpdateByValidTime(data))
+            {
+                return false;
+            }
+
+            AsymmetricKeyParameter key;
+            if (data.SerialNumber_Cert == data.SignSerialNumber_Cert)
+            {
+                key = PublicKeyFactory.CreateKey(data.SignAlg_Cert.PublicKey_SignAlg);
+            }
+            else
+            {
+                var root = GetCertificateBySerialNumber(data.SignSerialNumber_Cert);
+                if (root == null) {
+                    return false;
+                }
+                key = PublicKeyFactory.CreateKey(root.SignAlg_Cert.PublicKey_SignAlg);
+            }
+
+            try
+            {
+                cert.Verify(key);
+            }
+            catch (CertificateException)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static byte[] GetMessageSignature(byte[] message, byte[] x509Cert)
+        {
+            X509CertificateParser parser = new X509CertificateParser();
+            X509Certificate cert = parser.ReadCertificate(x509Cert);
+
+            var data = CreateDatabaseInfoFromCertificate(cert);
+            if (data == null || UpdateByValidTime(data))
+            {
+                return new byte[0];
+            }
+
+            var signatureFunc = GetDigitalSignatureProvider(data.SignAlg_Cert.AlgParSet_SignAlg);
+            var hashFunc = GetHashFunctionProvider(data.SignAlg_Cert.AlgParSet_SignAlg);
+
+            try
+            {
+                byte[] hash = hashFunc.GetHash(message);
+                byte[] signature = signatureFunc.CreateSignature(hash, (PrivateKeyFactory.CreateKey(data.SignAlg_Cert.PrivateKey_SignAlg) as ECPrivateKeyParameters)?.D.ToByteArrayUnsigned());
+
+                return signature;
+            }
+            catch (Exception)
+            {
+                return new byte[0];
+            }
+        }
+
+        public static bool IsSignatureValid(byte[] message, byte[] signature, byte[] x509Cert)
+        {
+            X509CertificateParser parser = new X509CertificateParser();
+            X509Certificate cert = parser.ReadCertificate(x509Cert);
+
+            var data = CreateDatabaseInfoFromCertificate(cert);
+            if (data == null || UpdateByValidTime(data))
+            {
+                return false;
+            }
+
+            var signatureFunc = GetDigitalSignatureProvider(data.SignAlg_Cert.AlgParSet_SignAlg);
+            var hashFunc = GetHashFunctionProvider(data.SignAlg_Cert.AlgParSet_SignAlg);
+
+            return signatureFunc.IsSignatureValid(hashFunc.GetHash(message), signature, signatureFunc.GeneratePublicKey((PrivateKeyFactory.CreateKey(data.SignAlg_Cert.PrivateKey_SignAlg) as ECPrivateKeyParameters)?.D.ToByteArrayUnsigned()));
+        }
+
+        public static SignAlg GetCertificateParameters(byte[] x509Cert)
+        {
+            X509CertificateParser parser = new X509CertificateParser();
+            X509Certificate cert = parser.ReadCertificate(x509Cert);
+
+            var data = CreateDatabaseInfoFromCertificate(cert);
+            if (data == null)
+            {
+                throw new Exception("Error occured when got certificate params!");
+            }
+            return data.SignAlg_Cert;
+        }
+
+        private static bool UpdateByValidTime(Cert certificate)
+        {
+            var time = DateTime.Now;
+            if (certificate.ValidBy_Cert < time)
+            {
+                foreach (var cert in DatabaseInstance.GetInstance().Certs.Where(elm => elm.SignSerialNumber_Cert == certificate.SerialNumber_Cert).AsEnumerable())
+                {
+                    DatabaseInstance.GetInstance().Certs.Remove(cert);
+                    DatabaseInstance.GetInstance().CancelledCerts.Add(new CancelledCert(cert));
+                }
+                DatabaseInstance.GetInstance().SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
         private static Issuer GetCurrentCertificationAuthority()
         {
             return DatabaseInstance.GetInstance().Issuers
                 .Include(elm => elm.City_Issuer).ThenInclude(elm => elm.Region_City).ThenInclude(elm => elm.Country_Region)
-                .FirstOrDefault(elm => elm.Name_Issuer == "Komsomolsk-on-Amur State University");
+                .FirstOrDefault();
         }
 
         private static AsymmetricCipherKeyPair GenerateKeyPair(AlgParSet parameters)
@@ -191,6 +318,44 @@ namespace CertificateAuthority.Components
             throw new Exception("Wrong parameters OID!");
         }
 
+        private static DigitalSignature.DigitalSignature GetDigitalSignatureProvider(AlgParSet parameters)
+        {
+            switch (parameters.Len_AlgParSet.Value_Len)
+            {
+                case 512:
+                {
+                    return new DigitalSignature.DigitalSignature(new GOST34102018Policy512bit(new ParameterSet(ParameterSet.GetIDFromOID(parameters.OID_AlgParSet))));
+                }
+                case 256:
+                {
+                    return new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.GetIDFromOID(parameters.OID_AlgParSet))));
+                }
+                default:
+                {
+                    throw new Exception("Something wrong with parameters set!");
+                }
+            }
+        }
+
+        private static HashFunction GetHashFunctionProvider(AlgParSet parameters)
+        {
+            switch (parameters.Len_AlgParSet.Value_Len)
+            {
+                case 512:
+                {
+                    return new HashFunction(new GOST34112018Policy512bit());
+                }
+                case 256:
+                {
+                    return new HashFunction(new GOST34112018Policy256bit());
+                }
+                default:
+                {
+                    throw new Exception("Something wrong with parameters set!");
+                }
+            }
+        }
+
         private static X509Certificate CreateCertificateFromDatabaseInfo(Cert certificate)
         {
             #region Issuer Attributes
@@ -231,7 +396,7 @@ namespace CertificateAuthority.Components
             #endregion
 
             X509Certificate rootCert = null;
-            if (certificate.Issuer_Cert.Name_Issuer != certificate.Subj_Cert.Name_Subj)
+            if (certificate.SerialNumber_Cert != certificate.SignSerialNumber_Cert)
             {
                 rootCert = new X509CertificateParser().ReadCertificate(GetRootCertificate());
 
@@ -298,6 +463,20 @@ namespace CertificateAuthority.Components
                 .Include(elm => elm.Subj_Cert).ThenInclude(elm => elm.City_Subj).ThenInclude(elm => elm.Region_City).ThenInclude(elm => elm.Country_Region)
                 .Include(elm => elm.Issuer_Cert).ThenInclude(elm => elm.City_Issuer).ThenInclude(elm => elm.Region_City).ThenInclude(elm => elm.Country_Region)
                 .FirstOrDefault(elm => elm.SerialNumber_Cert == cert.SerialNumber.ToString());
+        }
+
+        private static Cert GetCertificateBySerialNumber(string sn)
+        {
+            return DatabaseInstance.GetInstance().Certs
+                .Include(elm => elm.Ver_Cert)
+                .Include(elm => elm.SignAlg_Cert).ThenInclude(elm => elm.AlgParSet_SignAlg).ThenInclude(elm => elm.AlgName_AlgParSet)
+                .Include(elm => elm.SignAlg_Cert).ThenInclude(elm => elm.AlgParSet_SignAlg).ThenInclude(elm => elm.HashType_AlgParSet)
+                .Include(elm => elm.SignAlg_Cert).ThenInclude(elm => elm.AlgParSet_SignAlg).ThenInclude(elm => elm.Len_AlgParSet)
+                .Include(elm => elm.Subj_Cert).ThenInclude(elm => elm.Gender_Subj)
+                .Include(elm => elm.Subj_Cert).ThenInclude(elm => elm.Citizen_Subj)
+                .Include(elm => elm.Subj_Cert).ThenInclude(elm => elm.City_Subj).ThenInclude(elm => elm.Region_City).ThenInclude(elm => elm.Country_Region)
+                .Include(elm => elm.Issuer_Cert).ThenInclude(elm => elm.City_Issuer).ThenInclude(elm => elm.Region_City).ThenInclude(elm => elm.Country_Region)
+                .FirstOrDefault(elm => elm.SerialNumber_Cert == sn);
         }
     }
 }

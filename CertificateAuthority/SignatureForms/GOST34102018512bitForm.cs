@@ -13,7 +13,7 @@ namespace CertificateAuthority.SignatureForms
         public GOST34102018512bitForm()
         {
             InitializeComponent();
-            C512RadioButton.Checked = true;
+            A512RadioButton.Checked = true;
         }
 
         private void VerifySignatureButton_Click(object sender, EventArgs e)

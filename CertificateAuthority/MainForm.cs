@@ -110,6 +110,11 @@ namespace CertificateAuthority
         {
             m_CertsViewForm = UpdateForm(m_CertsViewForm);
         }
+
+        private void CancelledCertsMenuItem_Click(object sender, EventArgs e)
+        {
+            m_CancelledCertviewForm = UpdateForm(m_CancelledCertviewForm);
+        }
         #endregion
 
         #region Buttons
@@ -122,11 +127,13 @@ namespace CertificateAuthority
         {
             var certificate = X509CertificateController.GetRootCertificate();
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "X509 Certificate|*.crt";
-            saveFileDialog.FilterIndex = 1;
-            saveFileDialog.Title = "Save a Certificate File";
-            saveFileDialog.RestoreDirectory = true;
+            using SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "X509 Certificate|*.crt",
+                FilterIndex = 1,
+                Title = "Save a Certificate File",
+                RestoreDirectory = true
+            };
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -137,6 +144,44 @@ namespace CertificateAuthority
                     dataStream.Close();
                 }
             }
+        }
+
+        private void ValidationButton_Click(object sender, EventArgs e)
+        {
+            using OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "C:\\";
+            openFileDialog.Filter = "X509 Certificate|*.crt";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var stream = openFileDialog.OpenFile();
+                using BinaryReader reader = new BinaryReader(stream);
+                byte[] fileContent = reader.ReadBytes(Convert.ToInt32(stream.Length));
+
+                Form dialog;
+                if (X509CertificateController.IsValid(fileContent))
+                {
+                    dialog = new ValidCertificateForm();
+                }
+                else
+                {
+                    dialog = new InvalidCertificateForm();
+                }
+                dialog.ShowDialog(this);
+                dialog.Dispose();
+            }
+        }
+
+        private void CalculateSignatureButton_Click(object sender, EventArgs e)
+        {
+            m_CalculateSignatureForm = UpdateForm(m_CalculateSignatureForm);
+        }
+
+        private void SignatureVerificateionButton_Click(object sender, EventArgs e)
+        {
+            m_VerifySignatureForm = UpdateForm(m_VerifySignatureForm);
         }
         #endregion
 
@@ -176,7 +221,10 @@ namespace CertificateAuthority
         private SignAlgViewForm m_SignAlgsViewForm;
         private VerViewForm m_VersViewForm;
         private CertViewForm m_CertsViewForm;
+        private CancelledCertViewForm m_CancelledCertviewForm;
 
         private CreateCertificateForm m_CreateCertificateForm;
+        private CalculateSignatureForm m_CalculateSignatureForm;
+        private VerifySignatureForm m_VerifySignatureForm;
     }
 }

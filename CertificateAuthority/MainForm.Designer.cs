@@ -39,6 +39,9 @@
             this.GOST34102018512bitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RepositoriesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ValidCertificatesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CertsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.InvalidCertificatesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CancelledCertsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CountriesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RegionsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CitiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,9 +55,11 @@
             this.AlgParSetsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SignAlgsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.VersMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CertsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateCertificateButton = new System.Windows.Forms.Button();
             this.GetRootCertificateButton = new System.Windows.Forms.Button();
+            this.ValidationButton = new System.Windows.Forms.Button();
+            this.CalculateSignatureButton = new System.Windows.Forms.Button();
+            this.SignatureVerificateionButton = new System.Windows.Forms.Button();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -140,14 +145,8 @@
             // RepositoriesMenuItem
             // 
             this.RepositoriesMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ValidCertificatesMenuItem});
-            this.RepositoriesMenuItem.Name = "RepositoriesMenuItem";
-            this.RepositoriesMenuItem.Size = new System.Drawing.Size(125, 29);
-            this.RepositoriesMenuItem.Text = "Repositories";
-            // 
-            // ValidCertificatesMenuItem
-            // 
-            this.ValidCertificatesMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ValidCertificatesMenuItem,
+            this.InvalidCertificatesMenuItem,
             this.CountriesMenuItem,
             this.RegionsMenuItem,
             this.CitiesMenuItem,
@@ -160,12 +159,44 @@
             this.HashTypesMenuItem,
             this.AlgParSetsMenuItem,
             this.SignAlgsMenuItem,
-            this.VersMenuItem,
+            this.VersMenuItem});
+            this.RepositoriesMenuItem.Name = "RepositoriesMenuItem";
+            this.RepositoriesMenuItem.Size = new System.Drawing.Size(125, 29);
+            this.RepositoriesMenuItem.Text = "Repositories";
+            // 
+            // ValidCertificatesMenuItem
+            // 
+            this.ValidCertificatesMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CertsMenuItem});
             this.ValidCertificatesMenuItem.Name = "ValidCertificatesMenuItem";
-            this.ValidCertificatesMenuItem.Size = new System.Drawing.Size(322, 34);
+            this.ValidCertificatesMenuItem.Size = new System.Drawing.Size(336, 34);
             this.ValidCertificatesMenuItem.Text = "Valid Certificates Database";
             this.ValidCertificatesMenuItem.ToolTipText = "Valid Certificates Database";
+            // 
+            // CertsMenuItem
+            // 
+            this.CertsMenuItem.Name = "CertsMenuItem";
+            this.CertsMenuItem.Size = new System.Drawing.Size(200, 34);
+            this.CertsMenuItem.Text = "Certificates";
+            this.CertsMenuItem.ToolTipText = "Certs table";
+            this.CertsMenuItem.Click += new System.EventHandler(this.CertsMenuItem_Click);
+            // 
+            // InvalidCertificatesMenuItem
+            // 
+            this.InvalidCertificatesMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CancelledCertsMenuItem});
+            this.InvalidCertificatesMenuItem.Name = "InvalidCertificatesMenuItem";
+            this.InvalidCertificatesMenuItem.Size = new System.Drawing.Size(336, 34);
+            this.InvalidCertificatesMenuItem.Text = "Invalid Certificates Database";
+            this.InvalidCertificatesMenuItem.ToolTipText = "Invalid Certificates Database";
+            // 
+            // CancelledCertsMenuItem
+            // 
+            this.CancelledCertsMenuItem.Name = "CancelledCertsMenuItem";
+            this.CancelledCertsMenuItem.Size = new System.Drawing.Size(280, 34);
+            this.CancelledCertsMenuItem.Text = "Cancelled Certificates";
+            this.CancelledCertsMenuItem.ToolTipText = "CancelledCerts table";
+            this.CancelledCertsMenuItem.Click += new System.EventHandler(this.CancelledCertsMenuItem_Click);
             // 
             // CountriesMenuItem
             // 
@@ -195,7 +226,7 @@
             // 
             this.CitizensMenuItem.Name = "CitizensMenuItem";
             this.CitizensMenuItem.Size = new System.Drawing.Size(336, 34);
-            this.CitizensMenuItem.Text = "Citizens";
+            this.CitizensMenuItem.Text = "Citizenships";
             this.CitizensMenuItem.ToolTipText = "Citizens table";
             this.CitizensMenuItem.Click += new System.EventHandler(this.CitizensMenuItem_Click);
             // 
@@ -220,7 +251,7 @@
             this.SubjectsMenuItem.Name = "SubjectsMenuItem";
             this.SubjectsMenuItem.Size = new System.Drawing.Size(336, 34);
             this.SubjectsMenuItem.Text = "Subjects";
-            this.SubjectsMenuItem.ToolTipText = "Subjects table";
+            this.SubjectsMenuItem.ToolTipText = "Subjs table";
             this.SubjectsMenuItem.Click += new System.EventHandler(this.SubjectsMenuItem_Click);
             // 
             // LensMenuItem
@@ -271,17 +302,9 @@
             this.VersMenuItem.ToolTipText = "Vers table";
             this.VersMenuItem.Click += new System.EventHandler(this.VersMenuItem_Click);
             // 
-            // CertsMenuItem
-            // 
-            this.CertsMenuItem.Name = "CertsMenuItem";
-            this.CertsMenuItem.Size = new System.Drawing.Size(336, 34);
-            this.CertsMenuItem.Text = "Certificates";
-            this.CertsMenuItem.ToolTipText = "Certs table";
-            this.CertsMenuItem.Click += new System.EventHandler(this.CertsMenuItem_Click);
-            // 
             // CreateCertificateButton
             // 
-            this.CreateCertificateButton.Location = new System.Drawing.Point(194, 38);
+            this.CreateCertificateButton.Location = new System.Drawing.Point(194, 40);
             this.CreateCertificateButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.CreateCertificateButton.Name = "CreateCertificateButton";
             this.CreateCertificateButton.Size = new System.Drawing.Size(175, 70);
@@ -300,11 +323,44 @@
             this.GetRootCertificateButton.UseVisualStyleBackColor = true;
             this.GetRootCertificateButton.Click += new System.EventHandler(this.GetRootCertificateButton_Click);
             // 
+            // ValidationButton
+            // 
+            this.ValidationButton.Location = new System.Drawing.Point(376, 40);
+            this.ValidationButton.Name = "ValidationButton";
+            this.ValidationButton.Size = new System.Drawing.Size(175, 70);
+            this.ValidationButton.TabIndex = 7;
+            this.ValidationButton.Text = "Certificate Validation";
+            this.ValidationButton.UseVisualStyleBackColor = true;
+            this.ValidationButton.Click += new System.EventHandler(this.ValidationButton_Click);
+            // 
+            // CalculateSignatureButton
+            // 
+            this.CalculateSignatureButton.Location = new System.Drawing.Point(12, 179);
+            this.CalculateSignatureButton.Name = "CalculateSignatureButton";
+            this.CalculateSignatureButton.Size = new System.Drawing.Size(175, 70);
+            this.CalculateSignatureButton.TabIndex = 8;
+            this.CalculateSignatureButton.Text = "Calculate Message Signature";
+            this.CalculateSignatureButton.UseVisualStyleBackColor = true;
+            this.CalculateSignatureButton.Click += new System.EventHandler(this.CalculateSignatureButton_Click);
+            // 
+            // SignatureVerificateionButton
+            // 
+            this.SignatureVerificateionButton.Location = new System.Drawing.Point(194, 179);
+            this.SignatureVerificateionButton.Name = "SignatureVerificateionButton";
+            this.SignatureVerificateionButton.Size = new System.Drawing.Size(175, 70);
+            this.SignatureVerificateionButton.TabIndex = 9;
+            this.SignatureVerificateionButton.Text = "Verify Message Signature";
+            this.SignatureVerificateionButton.UseVisualStyleBackColor = true;
+            this.SignatureVerificateionButton.Click += new System.EventHandler(this.SignatureVerificateionButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1120, 935);
+            this.Controls.Add(this.SignatureVerificateionButton);
+            this.Controls.Add(this.CalculateSignatureButton);
+            this.Controls.Add(this.ValidationButton);
             this.Controls.Add(this.GetRootCertificateButton);
             this.Controls.Add(this.CreateCertificateButton);
             this.Controls.Add(this.MainMenu);
@@ -333,6 +389,12 @@
         private System.Windows.Forms.ToolStripMenuItem GOST34102018512bitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RepositoriesMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ValidCertificatesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CertsMenuItem;
+        private System.Windows.Forms.Button CreateCertificateButton;
+        private System.Windows.Forms.Button GetRootCertificateButton;
+        private System.Windows.Forms.Button ValidationButton;
+        private System.Windows.Forms.ToolStripMenuItem InvalidCertificatesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CancelledCertsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CountriesMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RegionsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CitiesMenuItem;
@@ -346,9 +408,8 @@
         private System.Windows.Forms.ToolStripMenuItem AlgParSetsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SignAlgsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem VersMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem CertsMenuItem;
-        private System.Windows.Forms.Button CreateCertificateButton;
-        private System.Windows.Forms.Button GetRootCertificateButton;
+        private System.Windows.Forms.Button CalculateSignatureButton;
+        private System.Windows.Forms.Button SignatureVerificateionButton;
     }
 }
 
