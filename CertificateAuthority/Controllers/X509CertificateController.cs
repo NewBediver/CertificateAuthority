@@ -247,6 +247,8 @@ namespace CertificateAuthority.Components
             var time = DateTime.Now;
             if (certificate.ValidBy_Cert < time)
             {
+                DatabaseInstance.GetInstance().Certs.Remove(certificate);
+                DatabaseInstance.GetInstance().CancelledCerts.Add(new CancelledCert(certificate));
                 foreach (var cert in DatabaseInstance.GetInstance().Certs.Where(elm => elm.SignSerialNumber_Cert == certificate.SerialNumber_Cert).AsEnumerable())
                 {
                     DatabaseInstance.GetInstance().Certs.Remove(cert);
