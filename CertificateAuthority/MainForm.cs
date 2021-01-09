@@ -148,30 +148,7 @@ namespace CertificateAuthority
 
         private void ValidationButton_Click(object sender, EventArgs e)
         {
-            using OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = "C:\\";
-            openFileDialog.Filter = "X509 Certificate|*.crt";
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.RestoreDirectory = true;
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                var stream = openFileDialog.OpenFile();
-                using BinaryReader reader = new BinaryReader(stream);
-                byte[] fileContent = reader.ReadBytes(Convert.ToInt32(stream.Length));
-
-                Form dialog;
-                if (X509CertificateController.IsValid(fileContent))
-                {
-                    dialog = new ValidCertificateForm();
-                }
-                else
-                {
-                    dialog = new InvalidCertificateForm();
-                }
-                dialog.ShowDialog(this);
-                dialog.Dispose();
-            }
+            m_VerifyCertificateForm = UpdateForm(m_VerifyCertificateForm);
         }
 
         private void CalculateSignatureButton_Click(object sender, EventArgs e)
@@ -224,6 +201,7 @@ namespace CertificateAuthority
         private CancelledCertViewForm m_CancelledCertviewForm;
 
         private CreateCertificateForm m_CreateCertificateForm;
+        private VerifyCertificateForm m_VerifyCertificateForm;
         private CalculateSignatureForm m_CalculateSignatureForm;
         private VerifySignatureForm m_VerifySignatureForm;
     }

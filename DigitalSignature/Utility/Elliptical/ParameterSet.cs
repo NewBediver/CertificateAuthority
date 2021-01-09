@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DigitalSignature.Utility.Elliptical
+﻿namespace DigitalSignature.Utility.Elliptical
 {
     /// <summary>
     /// Coefficients from P 1323565.1.024—2019

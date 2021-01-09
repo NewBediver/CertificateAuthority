@@ -224,7 +224,9 @@ namespace CertificateAuthority.Components
             var signatureFunc = GetDigitalSignatureProvider(data.SignAlg_Cert.AlgParSet_SignAlg);
             var hashFunc = GetHashFunctionProvider(data.SignAlg_Cert.AlgParSet_SignAlg);
 
-            return signatureFunc.IsSignatureValid(hashFunc.GetHash(message), signature, signatureFunc.GeneratePublicKey((PrivateKeyFactory.CreateKey(data.SignAlg_Cert.PrivateKey_SignAlg) as ECPrivateKeyParameters)?.D.ToByteArrayUnsigned()));
+            return signatureFunc.IsSignatureValid(hashFunc.GetHash(message), signature, (PublicKeyFactory.CreateKey(data.SignAlg_Cert.PublicKey_SignAlg) as ECPublicKeyParameters)?.Q.XCoord.GetEncoded()
+                                                                                        .Concat((PublicKeyFactory.CreateKey(data.SignAlg_Cert.PublicKey_SignAlg) as ECPublicKeyParameters)?.Q.YCoord.GetEncoded())
+                                                                                        .ToArray());
         }
 
         public static SignAlg GetCertificateParameters(byte[] x509Cert)
@@ -295,16 +297,6 @@ namespace CertificateAuthority.Components
             };
         }
 
-        private static DerObjectIdentifier GetHashAlgoOID(AlgParSet parameters)
-        {
-            return parameters.Len_AlgParSet.Value_Len switch
-            {
-                256 => RosstandartObjectIdentifiers.id_tc26_gost_3411_12_256,
-                512 => RosstandartObjectIdentifiers.id_tc26_gost_3411_12_512,
-                _ => throw new Exception("Wrong parameters length!"),
-            };
-        }
-
         private static DerObjectIdentifier GetDigitalSignatureAlgoParameterSetOID(AlgParSet parameters)
         {
             if (parameters.OID_AlgParSet == "1.2.643.7.1.2.1.2.1") return RosstandartObjectIdentifiers.id_tc26_gost_3410_12_512_paramSetA;
@@ -328,7 +320,7 @@ namespace CertificateAuthority.Components
                 }
                 case 256:
                 {
-                    return new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.GetIDFromOID(parameters.OID_AlgParSet))));
+                    return new DigitalSignature.DigitalSignature(new GOST34102018Policy256bit(new ParameterSet(ParameterSet.GetIDFromOID("1.2.643.7.1.2.1.1.1"/*parameters.OID_AlgParSet*/))));
                 }
                 default:
                 {
