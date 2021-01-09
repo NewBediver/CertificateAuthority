@@ -54,45 +54,51 @@ namespace CertificateAuthority.BehaviourForms
             this.ParametersGroupBox.Controls.Add(this.LoadSignatureButton);
             this.ParametersGroupBox.Controls.Add(this.LoadMessageButton);
             this.ParametersGroupBox.Controls.Add(this.LoadCertificateButton);
-            this.ParametersGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.ParametersGroupBox.Location = new System.Drawing.Point(8, 7);
+            this.ParametersGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ParametersGroupBox.Name = "ParametersGroupBox";
-            this.ParametersGroupBox.Size = new System.Drawing.Size(453, 442);
+            this.ParametersGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ParametersGroupBox.Size = new System.Drawing.Size(511, 492);
             this.ParametersGroupBox.TabIndex = 0;
             this.ParametersGroupBox.TabStop = false;
             this.ParametersGroupBox.Text = "Parameters";
             // 
             // SignatureRichTextBox
             // 
-            this.SignatureRichTextBox.Location = new System.Drawing.Point(142, 300);
+            this.SignatureRichTextBox.Location = new System.Drawing.Point(163, 335);
+            this.SignatureRichTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.SignatureRichTextBox.Name = "SignatureRichTextBox";
             this.SignatureRichTextBox.ReadOnly = true;
-            this.SignatureRichTextBox.Size = new System.Drawing.Size(305, 130);
+            this.SignatureRichTextBox.Size = new System.Drawing.Size(344, 153);
             this.SignatureRichTextBox.TabIndex = 5;
             this.SignatureRichTextBox.Text = "";
             // 
             // MessageRichTextBox
             // 
-            this.MessageRichTextBox.Location = new System.Drawing.Point(142, 164);
+            this.MessageRichTextBox.Location = new System.Drawing.Point(163, 174);
+            this.MessageRichTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MessageRichTextBox.Name = "MessageRichTextBox";
             this.MessageRichTextBox.ReadOnly = true;
-            this.MessageRichTextBox.Size = new System.Drawing.Size(305, 130);
+            this.MessageRichTextBox.Size = new System.Drawing.Size(344, 157);
             this.MessageRichTextBox.TabIndex = 4;
             this.MessageRichTextBox.Text = "";
             // 
             // CertificateRichTextBox
             // 
-            this.CertificateRichTextBox.Location = new System.Drawing.Point(142, 28);
+            this.CertificateRichTextBox.Location = new System.Drawing.Point(163, 15);
+            this.CertificateRichTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CertificateRichTextBox.Name = "CertificateRichTextBox";
             this.CertificateRichTextBox.ReadOnly = true;
-            this.CertificateRichTextBox.Size = new System.Drawing.Size(305, 130);
+            this.CertificateRichTextBox.Size = new System.Drawing.Size(344, 155);
             this.CertificateRichTextBox.TabIndex = 3;
             this.CertificateRichTextBox.Text = "";
             // 
             // LoadSignatureButton
             // 
-            this.LoadSignatureButton.Location = new System.Drawing.Point(6, 300);
+            this.LoadSignatureButton.Location = new System.Drawing.Point(4, 333);
+            this.LoadSignatureButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LoadSignatureButton.Name = "LoadSignatureButton";
-            this.LoadSignatureButton.Size = new System.Drawing.Size(130, 130);
+            this.LoadSignatureButton.Size = new System.Drawing.Size(155, 155);
             this.LoadSignatureButton.TabIndex = 2;
             this.LoadSignatureButton.Text = "Load Signature";
             this.LoadSignatureButton.UseVisualStyleBackColor = true;
@@ -100,9 +106,10 @@ namespace CertificateAuthority.BehaviourForms
             // 
             // LoadMessageButton
             // 
-            this.LoadMessageButton.Location = new System.Drawing.Point(6, 164);
+            this.LoadMessageButton.Location = new System.Drawing.Point(4, 174);
+            this.LoadMessageButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LoadMessageButton.Name = "LoadMessageButton";
-            this.LoadMessageButton.Size = new System.Drawing.Size(130, 130);
+            this.LoadMessageButton.Size = new System.Drawing.Size(155, 155);
             this.LoadMessageButton.TabIndex = 1;
             this.LoadMessageButton.Text = "Load Message";
             this.LoadMessageButton.UseVisualStyleBackColor = true;
@@ -110,9 +117,10 @@ namespace CertificateAuthority.BehaviourForms
             // 
             // LoadCertificateButton
             // 
-            this.LoadCertificateButton.Location = new System.Drawing.Point(6, 28);
+            this.LoadCertificateButton.Location = new System.Drawing.Point(4, 15);
+            this.LoadCertificateButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LoadCertificateButton.Name = "LoadCertificateButton";
-            this.LoadCertificateButton.Size = new System.Drawing.Size(130, 130);
+            this.LoadCertificateButton.Size = new System.Drawing.Size(155, 155);
             this.LoadCertificateButton.TabIndex = 0;
             this.LoadCertificateButton.Text = "Load Certificate";
             this.LoadCertificateButton.UseVisualStyleBackColor = true;
@@ -121,45 +129,52 @@ namespace CertificateAuthority.BehaviourForms
             // ResultGroupBox
             // 
             this.ResultGroupBox.Controls.Add(this.ResultTextBox);
-            this.ResultGroupBox.Location = new System.Drawing.Point(12, 460);
+            this.ResultGroupBox.Location = new System.Drawing.Point(5, 501);
+            this.ResultGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ResultGroupBox.Name = "ResultGroupBox";
-            this.ResultGroupBox.Size = new System.Drawing.Size(754, 72);
+            this.ResultGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ResultGroupBox.Size = new System.Drawing.Size(768, 49);
             this.ResultGroupBox.TabIndex = 1;
             this.ResultGroupBox.TabStop = false;
             this.ResultGroupBox.Text = "Result";
             // 
             // ResultTextBox
             // 
-            this.ResultTextBox.Location = new System.Drawing.Point(6, 30);
+            this.ResultTextBox.Location = new System.Drawing.Point(4, 18);
+            this.ResultTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ResultTextBox.Name = "ResultTextBox";
             this.ResultTextBox.ReadOnly = true;
-            this.ResultTextBox.Size = new System.Drawing.Size(742, 31);
+            this.ResultTextBox.Size = new System.Drawing.Size(760, 23);
             this.ResultTextBox.TabIndex = 0;
             // 
             // DebugGroupBox
             // 
             this.DebugGroupBox.Controls.Add(this.DebugRichTextBox);
-            this.DebugGroupBox.Location = new System.Drawing.Point(481, 12);
+            this.DebugGroupBox.Location = new System.Drawing.Point(523, 7);
+            this.DebugGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.DebugGroupBox.Name = "DebugGroupBox";
-            this.DebugGroupBox.Size = new System.Drawing.Size(285, 381);
+            this.DebugGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DebugGroupBox.Size = new System.Drawing.Size(250, 453);
             this.DebugGroupBox.TabIndex = 2;
             this.DebugGroupBox.TabStop = false;
             this.DebugGroupBox.Text = "Debug";
             // 
             // DebugRichTextBox
             // 
-            this.DebugRichTextBox.Location = new System.Drawing.Point(6, 30);
+            this.DebugRichTextBox.Location = new System.Drawing.Point(4, 18);
+            this.DebugRichTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.DebugRichTextBox.Name = "DebugRichTextBox";
             this.DebugRichTextBox.ReadOnly = true;
-            this.DebugRichTextBox.Size = new System.Drawing.Size(273, 345);
+            this.DebugRichTextBox.Size = new System.Drawing.Size(242, 431);
             this.DebugRichTextBox.TabIndex = 0;
             this.DebugRichTextBox.Text = "";
             // 
             // VerifySignatureButton
             // 
-            this.VerifySignatureButton.Location = new System.Drawing.Point(481, 399);
+            this.VerifySignatureButton.Location = new System.Drawing.Point(523, 464);
+            this.VerifySignatureButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.VerifySignatureButton.Name = "VerifySignatureButton";
-            this.VerifySignatureButton.Size = new System.Drawing.Size(285, 55);
+            this.VerifySignatureButton.Size = new System.Drawing.Size(250, 35);
             this.VerifySignatureButton.TabIndex = 3;
             this.VerifySignatureButton.Text = "Verify Signature";
             this.VerifySignatureButton.UseVisualStyleBackColor = true;
@@ -167,14 +182,15 @@ namespace CertificateAuthority.BehaviourForms
             // 
             // VerifySignatureForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(778, 544);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.VerifySignatureButton);
             this.Controls.Add(this.DebugGroupBox);
             this.Controls.Add(this.ResultGroupBox);
             this.Controls.Add(this.ParametersGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "VerifySignatureForm";
             this.Text = "Verify Signature";
             this.ParametersGroupBox.ResumeLayout(false);

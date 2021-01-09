@@ -3,6 +3,7 @@ using CertificateRepository.Controller;
 using CertificateRepository.Model;
 using DigitalSignature.Utility.Elliptical;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.X509;
 using System;
 using System.IO;
 using System.Linq;
@@ -256,6 +257,9 @@ namespace CertificateAuthority.BehaviourForms
                         dataStream.Write(certificate, 0, certificate.Length);
                         dataStream.Close();
                     }
+
+                    X509CertificateParser parser = new X509CertificateParser();
+                    DebugRichTextBox.Text = parser.ReadCertificate(certificate).ToString();
                 }
 
             }

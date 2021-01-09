@@ -24,5 +24,6 @@ namespace CertificateRepository.Model
         public City City_Issuer { get; set; }
 
         public ICollection<Cert> Certs_Issuer { get; set; }
+        public ICollection<CancelledCert> CancelledCerts_Issuer { get; set; }
     }
 }

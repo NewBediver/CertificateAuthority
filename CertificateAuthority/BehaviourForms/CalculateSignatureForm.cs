@@ -1,6 +1,7 @@
 ﻿using CertificateAuthority.Components;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
+using Org.BouncyCastle.X509;
 using System;
 using System.IO;
 using System.Linq;
@@ -38,7 +39,9 @@ namespace CertificateAuthority.BehaviourForms
                     {
                         m_Certificate = fileContent;
                         var signAlg = X509CertificateController.GetCertificateParameters(m_Certificate);
-                        CertificateRichTextBox.Text = "OID: " + signAlg.AlgParSet_SignAlg.OID_AlgParSet + Environment.NewLine;
+
+                        X509CertificateParser parser = new X509CertificateParser();
+                        CertificateRichTextBox.Text = parser.ReadCertificate(m_Certificate).ToString();
                     }
                     else
                     {

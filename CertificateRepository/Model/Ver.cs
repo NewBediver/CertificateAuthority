@@ -10,5 +10,6 @@ namespace CertificateRepository.Model
         public string Number_Ver { get; set; }
 
         public ICollection<Cert> Certs_Ver { get; set; }
+        public ICollection<CancelledCert> CancelledCerts_Ver { get; set; }
     }
 }

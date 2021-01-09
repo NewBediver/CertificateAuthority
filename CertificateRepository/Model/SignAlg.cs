@@ -16,5 +16,6 @@ namespace CertificateRepository.Model
         public AlgParSet AlgParSet_SignAlg { get; set; }
 
         public ICollection<Cert> Certs_SignAlg { get; set; }
+        public ICollection<CancelledCert> CancelledCerts_SignAlg { get; set; }
     }
 }

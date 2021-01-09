@@ -103,11 +103,9 @@ namespace CertificateAuthority.BehaviourForms
             this.UserInfoBox.Controls.Add(this.SubjNameLabel);
             this.UserInfoBox.Controls.Add(this.SubjSurnameTextBox);
             this.UserInfoBox.Controls.Add(this.SubjSurnameLabel);
-            this.UserInfoBox.Location = new System.Drawing.Point(13, 14);
-            this.UserInfoBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.UserInfoBox.Location = new System.Drawing.Point(9, 8);
             this.UserInfoBox.Name = "UserInfoBox";
-            this.UserInfoBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.UserInfoBox.Size = new System.Drawing.Size(752, 427);
+            this.UserInfoBox.Size = new System.Drawing.Size(450, 259);
             this.UserInfoBox.TabIndex = 0;
             this.UserInfoBox.TabStop = false;
             this.UserInfoBox.Text = "User Info";
@@ -115,268 +113,239 @@ namespace CertificateAuthority.BehaviourForms
             // SubjSNILSLabel
             // 
             this.SubjSNILSLabel.AutoSize = true;
-            this.SubjSNILSLabel.Location = new System.Drawing.Point(445, 386);
-            this.SubjSNILSLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjSNILSLabel.Location = new System.Drawing.Point(274, 232);
             this.SubjSNILSLabel.Name = "SubjSNILSLabel";
-            this.SubjSNILSLabel.Size = new System.Drawing.Size(58, 25);
+            this.SubjSNILSLabel.Size = new System.Drawing.Size(37, 15);
             this.SubjSNILSLabel.TabIndex = 1;
             this.SubjSNILSLabel.Text = "SNILS";
             // 
             // SubjSNILSTextBox
             // 
-            this.SubjSNILSTextBox.Location = new System.Drawing.Point(511, 383);
-            this.SubjSNILSTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjSNILSTextBox.Location = new System.Drawing.Point(320, 229);
             this.SubjSNILSTextBox.Name = "SubjSNILSTextBox";
-            this.SubjSNILSTextBox.Size = new System.Drawing.Size(233, 31);
+            this.SubjSNILSTextBox.Size = new System.Drawing.Size(123, 23);
             this.SubjSNILSTextBox.TabIndex = 2;
             // 
             // SubjINNLabel
             // 
             this.SubjINNLabel.AutoSize = true;
-            this.SubjINNLabel.Location = new System.Drawing.Point(460, 345);
-            this.SubjINNLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjINNLabel.Location = new System.Drawing.Point(284, 207);
             this.SubjINNLabel.Name = "SubjINNLabel";
-            this.SubjINNLabel.Size = new System.Drawing.Size(43, 25);
+            this.SubjINNLabel.Size = new System.Drawing.Size(28, 15);
             this.SubjINNLabel.TabIndex = 1;
             this.SubjINNLabel.Text = "INN";
             // 
             // SubjINNTextBox
             // 
-            this.SubjINNTextBox.Location = new System.Drawing.Point(511, 342);
-            this.SubjINNTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjINNTextBox.Location = new System.Drawing.Point(320, 205);
             this.SubjINNTextBox.Name = "SubjINNTextBox";
-            this.SubjINNTextBox.Size = new System.Drawing.Size(233, 31);
+            this.SubjINNTextBox.Size = new System.Drawing.Size(123, 23);
             this.SubjINNTextBox.TabIndex = 2;
             // 
             // SubjPassportNumberLabel
             // 
             this.SubjPassportNumberLabel.AutoSize = true;
-            this.SubjPassportNumberLabel.Location = new System.Drawing.Point(353, 304);
-            this.SubjPassportNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjPassportNumberLabel.Location = new System.Drawing.Point(209, 182);
             this.SubjPassportNumberLabel.Name = "SubjPassportNumberLabel";
-            this.SubjPassportNumberLabel.Size = new System.Drawing.Size(150, 25);
+            this.SubjPassportNumberLabel.Size = new System.Drawing.Size(99, 15);
             this.SubjPassportNumberLabel.TabIndex = 1;
             this.SubjPassportNumberLabel.Text = "Passport Number";
             // 
             // SubjPassportNumberTextBox
             // 
-            this.SubjPassportNumberTextBox.Location = new System.Drawing.Point(511, 301);
-            this.SubjPassportNumberTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjPassportNumberTextBox.Location = new System.Drawing.Point(320, 181);
             this.SubjPassportNumberTextBox.Name = "SubjPassportNumberTextBox";
-            this.SubjPassportNumberTextBox.Size = new System.Drawing.Size(233, 31);
+            this.SubjPassportNumberTextBox.Size = new System.Drawing.Size(123, 23);
             this.SubjPassportNumberTextBox.TabIndex = 2;
             // 
             // SubjPassportSeriasLabel
             // 
             this.SubjPassportSeriasLabel.AutoSize = true;
-            this.SubjPassportSeriasLabel.Location = new System.Drawing.Point(372, 263);
-            this.SubjPassportSeriasLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjPassportSeriasLabel.Location = new System.Drawing.Point(222, 158);
             this.SubjPassportSeriasLabel.Name = "SubjPassportSeriasLabel";
-            this.SubjPassportSeriasLabel.Size = new System.Drawing.Size(131, 25);
+            this.SubjPassportSeriasLabel.Size = new System.Drawing.Size(85, 15);
             this.SubjPassportSeriasLabel.TabIndex = 1;
             this.SubjPassportSeriasLabel.Text = "Passport Serias";
             // 
             // SubjPassportSeriasTextBox
             // 
-            this.SubjPassportSeriasTextBox.Location = new System.Drawing.Point(511, 260);
-            this.SubjPassportSeriasTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjPassportSeriasTextBox.Location = new System.Drawing.Point(320, 156);
             this.SubjPassportSeriasTextBox.Name = "SubjPassportSeriasTextBox";
-            this.SubjPassportSeriasTextBox.Size = new System.Drawing.Size(233, 31);
+            this.SubjPassportSeriasTextBox.Size = new System.Drawing.Size(123, 23);
             this.SubjPassportSeriasTextBox.TabIndex = 2;
             // 
             // SubjEMailLabel
             // 
             this.SubjEMailLabel.AutoSize = true;
-            this.SubjEMailLabel.Location = new System.Drawing.Point(34, 307);
-            this.SubjEMailLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjEMailLabel.Location = new System.Drawing.Point(24, 184);
             this.SubjEMailLabel.Name = "SubjEMailLabel";
-            this.SubjEMailLabel.Size = new System.Drawing.Size(54, 25);
+            this.SubjEMailLabel.Size = new System.Drawing.Size(36, 15);
             this.SubjEMailLabel.TabIndex = 1;
             this.SubjEMailLabel.Text = "EMail";
             // 
             // SubjEMailTextBox
             // 
-            this.SubjEMailTextBox.Location = new System.Drawing.Point(96, 304);
-            this.SubjEMailTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjEMailTextBox.Location = new System.Drawing.Point(67, 182);
             this.SubjEMailTextBox.Name = "SubjEMailTextBox";
-            this.SubjEMailTextBox.Size = new System.Drawing.Size(233, 31);
+            this.SubjEMailTextBox.Size = new System.Drawing.Size(123, 23);
             this.SubjEMailTextBox.TabIndex = 2;
             // 
             // SubjPhoneLabel
             // 
             this.SubjPhoneLabel.AutoSize = true;
-            this.SubjPhoneLabel.Location = new System.Drawing.Point(29, 266);
-            this.SubjPhoneLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjPhoneLabel.Location = new System.Drawing.Point(20, 160);
             this.SubjPhoneLabel.Name = "SubjPhoneLabel";
-            this.SubjPhoneLabel.Size = new System.Drawing.Size(62, 25);
+            this.SubjPhoneLabel.Size = new System.Drawing.Size(41, 15);
             this.SubjPhoneLabel.TabIndex = 1;
             this.SubjPhoneLabel.Text = "Phone";
             // 
             // SubjPhoneTextBox
             // 
-            this.SubjPhoneTextBox.Location = new System.Drawing.Point(96, 263);
-            this.SubjPhoneTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjPhoneTextBox.Location = new System.Drawing.Point(67, 158);
             this.SubjPhoneTextBox.Name = "SubjPhoneTextBox";
-            this.SubjPhoneTextBox.Size = new System.Drawing.Size(233, 31);
+            this.SubjPhoneTextBox.Size = new System.Drawing.Size(123, 23);
             this.SubjPhoneTextBox.TabIndex = 2;
             // 
             // SubjCityLabel
             // 
             this.SubjCityLabel.AutoSize = true;
-            this.SubjCityLabel.Location = new System.Drawing.Point(461, 202);
-            this.SubjCityLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjCityLabel.Location = new System.Drawing.Point(285, 121);
             this.SubjCityLabel.Name = "SubjCityLabel";
-            this.SubjCityLabel.Size = new System.Drawing.Size(42, 25);
+            this.SubjCityLabel.Size = new System.Drawing.Size(28, 15);
             this.SubjCityLabel.TabIndex = 1;
             this.SubjCityLabel.Text = "City";
             // 
             // SubjCityComboBox
             // 
             this.SubjCityComboBox.FormattingEnabled = true;
-            this.SubjCityComboBox.Location = new System.Drawing.Point(511, 199);
-            this.SubjCityComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjCityComboBox.Location = new System.Drawing.Point(320, 119);
             this.SubjCityComboBox.Name = "SubjCityComboBox";
-            this.SubjCityComboBox.Size = new System.Drawing.Size(233, 33);
+            this.SubjCityComboBox.Size = new System.Drawing.Size(123, 23);
             this.SubjCityComboBox.TabIndex = 2;
             // 
             // SubjRegionLabel
             // 
             this.SubjRegionLabel.AutoSize = true;
-            this.SubjRegionLabel.Location = new System.Drawing.Point(436, 159);
-            this.SubjRegionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjRegionLabel.Location = new System.Drawing.Point(267, 95);
             this.SubjRegionLabel.Name = "SubjRegionLabel";
-            this.SubjRegionLabel.Size = new System.Drawing.Size(67, 25);
+            this.SubjRegionLabel.Size = new System.Drawing.Size(44, 15);
             this.SubjRegionLabel.TabIndex = 1;
             this.SubjRegionLabel.Text = "Region";
             // 
             // SubjRegionComboBox
             // 
             this.SubjRegionComboBox.FormattingEnabled = true;
-            this.SubjRegionComboBox.Location = new System.Drawing.Point(511, 156);
-            this.SubjRegionComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjRegionComboBox.Location = new System.Drawing.Point(320, 94);
             this.SubjRegionComboBox.Name = "SubjRegionComboBox";
-            this.SubjRegionComboBox.Size = new System.Drawing.Size(233, 33);
+            this.SubjRegionComboBox.Size = new System.Drawing.Size(123, 23);
             this.SubjRegionComboBox.TabIndex = 2;
             this.SubjRegionComboBox.SelectedIndexChanged += new System.EventHandler(this.SubjRegionComboBox_SelectedIndexChanged);
             // 
             // SubjBirthdateDateTimePicker
             // 
-            this.SubjBirthdateDateTimePicker.Location = new System.Drawing.Point(96, 109);
-            this.SubjBirthdateDateTimePicker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjBirthdateDateTimePicker.Location = new System.Drawing.Point(67, 65);
             this.SubjBirthdateDateTimePicker.Name = "SubjBirthdateDateTimePicker";
-            this.SubjBirthdateDateTimePicker.Size = new System.Drawing.Size(233, 31);
+            this.SubjBirthdateDateTimePicker.Size = new System.Drawing.Size(123, 23);
             this.SubjBirthdateDateTimePicker.TabIndex = 7;
             // 
             // SubjCountryLabel
             // 
             this.SubjCountryLabel.AutoSize = true;
-            this.SubjCountryLabel.Location = new System.Drawing.Point(428, 116);
-            this.SubjCountryLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjCountryLabel.Location = new System.Drawing.Point(262, 70);
             this.SubjCountryLabel.Name = "SubjCountryLabel";
-            this.SubjCountryLabel.Size = new System.Drawing.Size(75, 25);
+            this.SubjCountryLabel.Size = new System.Drawing.Size(50, 15);
             this.SubjCountryLabel.TabIndex = 1;
             this.SubjCountryLabel.Text = "Country";
             // 
             // SubjCountryComboBox
             // 
             this.SubjCountryComboBox.FormattingEnabled = true;
-            this.SubjCountryComboBox.Location = new System.Drawing.Point(511, 113);
-            this.SubjCountryComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjCountryComboBox.Location = new System.Drawing.Point(320, 68);
             this.SubjCountryComboBox.Name = "SubjCountryComboBox";
-            this.SubjCountryComboBox.Size = new System.Drawing.Size(233, 33);
+            this.SubjCountryComboBox.Size = new System.Drawing.Size(123, 23);
             this.SubjCountryComboBox.TabIndex = 6;
             this.SubjCountryComboBox.SelectedIndexChanged += new System.EventHandler(this.SubjCountryComboBox_SelectedIndexChanged);
             // 
             // SubjCitizenshipLabel
             // 
             this.SubjCitizenshipLabel.AutoSize = true;
-            this.SubjCitizenshipLabel.Location = new System.Drawing.Point(406, 73);
-            this.SubjCitizenshipLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjCitizenshipLabel.Location = new System.Drawing.Point(246, 44);
             this.SubjCitizenshipLabel.Name = "SubjCitizenshipLabel";
-            this.SubjCitizenshipLabel.Size = new System.Drawing.Size(97, 25);
+            this.SubjCitizenshipLabel.Size = new System.Drawing.Size(65, 15);
             this.SubjCitizenshipLabel.TabIndex = 1;
             this.SubjCitizenshipLabel.Text = "Citizenship";
             // 
             // SubjCitizenshipComboBox
             // 
             this.SubjCitizenshipComboBox.FormattingEnabled = true;
-            this.SubjCitizenshipComboBox.Location = new System.Drawing.Point(511, 70);
-            this.SubjCitizenshipComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjCitizenshipComboBox.Location = new System.Drawing.Point(320, 42);
             this.SubjCitizenshipComboBox.Name = "SubjCitizenshipComboBox";
-            this.SubjCitizenshipComboBox.Size = new System.Drawing.Size(233, 33);
+            this.SubjCitizenshipComboBox.Size = new System.Drawing.Size(123, 23);
             this.SubjCitizenshipComboBox.TabIndex = 5;
             // 
             // SubjGenderLabel
             // 
             this.SubjGenderLabel.AutoSize = true;
-            this.SubjGenderLabel.Location = new System.Drawing.Point(434, 30);
-            this.SubjGenderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjGenderLabel.Location = new System.Drawing.Point(266, 18);
             this.SubjGenderLabel.Name = "SubjGenderLabel";
-            this.SubjGenderLabel.Size = new System.Drawing.Size(69, 25);
+            this.SubjGenderLabel.Size = new System.Drawing.Size(45, 15);
             this.SubjGenderLabel.TabIndex = 1;
             this.SubjGenderLabel.Text = "Gender";
             // 
             // SubjGenderComboBox
             // 
             this.SubjGenderComboBox.FormattingEnabled = true;
-            this.SubjGenderComboBox.Location = new System.Drawing.Point(511, 27);
-            this.SubjGenderComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjGenderComboBox.Location = new System.Drawing.Point(320, 16);
             this.SubjGenderComboBox.Name = "SubjGenderComboBox";
-            this.SubjGenderComboBox.Size = new System.Drawing.Size(233, 33);
+            this.SubjGenderComboBox.Size = new System.Drawing.Size(123, 23);
             this.SubjGenderComboBox.TabIndex = 4;
             // 
             // SubjBirthdateLabel
             // 
             this.SubjBirthdateLabel.AutoSize = true;
-            this.SubjBirthdateLabel.Location = new System.Drawing.Point(5, 113);
-            this.SubjBirthdateLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjBirthdateLabel.Location = new System.Drawing.Point(4, 68);
             this.SubjBirthdateLabel.Name = "SubjBirthdateLabel";
-            this.SubjBirthdateLabel.Size = new System.Drawing.Size(83, 25);
+            this.SubjBirthdateLabel.Size = new System.Drawing.Size(55, 15);
             this.SubjBirthdateLabel.TabIndex = 3;
             this.SubjBirthdateLabel.Text = "Birthdate";
             // 
             // SubjNameTextBox
             // 
-            this.SubjNameTextBox.Location = new System.Drawing.Point(96, 68);
-            this.SubjNameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjNameTextBox.Location = new System.Drawing.Point(67, 41);
             this.SubjNameTextBox.Name = "SubjNameTextBox";
-            this.SubjNameTextBox.Size = new System.Drawing.Size(233, 31);
+            this.SubjNameTextBox.Size = new System.Drawing.Size(123, 23);
             this.SubjNameTextBox.TabIndex = 1;
             // 
             // SubjNameLabel
             // 
             this.SubjNameLabel.AutoSize = true;
-            this.SubjNameLabel.Location = new System.Drawing.Point(29, 73);
-            this.SubjNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjNameLabel.Location = new System.Drawing.Point(20, 44);
             this.SubjNameLabel.Name = "SubjNameLabel";
-            this.SubjNameLabel.Size = new System.Drawing.Size(59, 25);
+            this.SubjNameLabel.Size = new System.Drawing.Size(39, 15);
             this.SubjNameLabel.TabIndex = 1;
             this.SubjNameLabel.Text = "Name";
             // 
             // SubjSurnameTextBox
             // 
-            this.SubjSurnameTextBox.Location = new System.Drawing.Point(96, 27);
-            this.SubjSurnameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubjSurnameTextBox.Location = new System.Drawing.Point(67, 16);
             this.SubjSurnameTextBox.Name = "SubjSurnameTextBox";
-            this.SubjSurnameTextBox.Size = new System.Drawing.Size(233, 31);
+            this.SubjSurnameTextBox.Size = new System.Drawing.Size(123, 23);
             this.SubjSurnameTextBox.TabIndex = 1;
             // 
             // SubjSurnameLabel
             // 
             this.SubjSurnameLabel.AutoSize = true;
-            this.SubjSurnameLabel.Location = new System.Drawing.Point(6, 30);
-            this.SubjSurnameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SubjSurnameLabel.Location = new System.Drawing.Point(4, 18);
             this.SubjSurnameLabel.Name = "SubjSurnameLabel";
-            this.SubjSurnameLabel.Size = new System.Drawing.Size(82, 25);
+            this.SubjSurnameLabel.Size = new System.Drawing.Size(54, 15);
             this.SubjSurnameLabel.TabIndex = 1;
             this.SubjSurnameLabel.Text = "Surname";
             // 
             // CreateButton
             // 
-            this.CreateButton.Location = new System.Drawing.Point(405, 634);
-            this.CreateButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CreateButton.Location = new System.Drawing.Point(465, 157);
             this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(357, 37);
+            this.CreateButton.Size = new System.Drawing.Size(307, 110);
             this.CreateButton.TabIndex = 1;
             this.CreateButton.Text = "Create";
             this.CreateButton.UseVisualStyleBackColor = true;
@@ -392,11 +361,9 @@ namespace CertificateAuthority.BehaviourForms
             this.AlgParSetGroupBox.Controls.Add(this.AlgParSetHashComboBox);
             this.AlgParSetGroupBox.Controls.Add(this.AlgParSetLenLabel);
             this.AlgParSetGroupBox.Controls.Add(this.AlgParSetLenComboBox);
-            this.AlgParSetGroupBox.Location = new System.Drawing.Point(13, 451);
-            this.AlgParSetGroupBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.AlgParSetGroupBox.Location = new System.Drawing.Point(465, 12);
             this.AlgParSetGroupBox.Name = "AlgParSetGroupBox";
-            this.AlgParSetGroupBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.AlgParSetGroupBox.Size = new System.Drawing.Size(384, 220);
+            this.AlgParSetGroupBox.Size = new System.Drawing.Size(307, 142);
             this.AlgParSetGroupBox.TabIndex = 2;
             this.AlgParSetGroupBox.TabStop = false;
             this.AlgParSetGroupBox.Text = "Parameters";
@@ -404,100 +371,92 @@ namespace CertificateAuthority.BehaviourForms
             // AlgParSetOIDLabel
             // 
             this.AlgParSetOIDLabel.AutoSize = true;
-            this.AlgParSetOIDLabel.Location = new System.Drawing.Point(133, 182);
-            this.AlgParSetOIDLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.AlgParSetOIDLabel.Location = new System.Drawing.Point(93, 109);
             this.AlgParSetOIDLabel.Name = "AlgParSetOIDLabel";
-            this.AlgParSetOIDLabel.Size = new System.Drawing.Size(44, 25);
+            this.AlgParSetOIDLabel.Size = new System.Drawing.Size(27, 15);
             this.AlgParSetOIDLabel.TabIndex = 3;
             this.AlgParSetOIDLabel.Text = "OID";
             // 
             // AlgParSetOIDComboBox
             // 
             this.AlgParSetOIDComboBox.FormattingEnabled = true;
-            this.AlgParSetOIDComboBox.Location = new System.Drawing.Point(180, 174);
-            this.AlgParSetOIDComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.AlgParSetOIDComboBox.Location = new System.Drawing.Point(126, 104);
             this.AlgParSetOIDComboBox.Name = "AlgParSetOIDComboBox";
-            this.AlgParSetOIDComboBox.Size = new System.Drawing.Size(194, 33);
+            this.AlgParSetOIDComboBox.Size = new System.Drawing.Size(175, 23);
             this.AlgParSetOIDComboBox.TabIndex = 4;
             // 
             // AlgParSetSignatureComboBox
             // 
             this.AlgParSetSignatureComboBox.FormattingEnabled = true;
-            this.AlgParSetSignatureComboBox.Location = new System.Drawing.Point(180, 128);
-            this.AlgParSetSignatureComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.AlgParSetSignatureComboBox.Location = new System.Drawing.Point(126, 77);
             this.AlgParSetSignatureComboBox.Name = "AlgParSetSignatureComboBox";
-            this.AlgParSetSignatureComboBox.Size = new System.Drawing.Size(194, 33);
+            this.AlgParSetSignatureComboBox.Size = new System.Drawing.Size(175, 23);
             this.AlgParSetSignatureComboBox.TabIndex = 3;
             // 
             // AlgParSetSignatureLabel
             // 
             this.AlgParSetSignatureLabel.AutoSize = true;
-            this.AlgParSetSignatureLabel.Location = new System.Drawing.Point(9, 133);
-            this.AlgParSetSignatureLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.AlgParSetSignatureLabel.Location = new System.Drawing.Point(6, 80);
             this.AlgParSetSignatureLabel.Name = "AlgParSetSignatureLabel";
-            this.AlgParSetSignatureLabel.Size = new System.Drawing.Size(172, 25);
+            this.AlgParSetSignatureLabel.Size = new System.Drawing.Size(114, 15);
             this.AlgParSetSignatureLabel.TabIndex = 3;
             this.AlgParSetSignatureLabel.Text = "Signature Algorithm";
             // 
             // AlgParSetHashLabel
             // 
             this.AlgParSetHashLabel.AutoSize = true;
-            this.AlgParSetHashLabel.Location = new System.Drawing.Point(76, 85);
-            this.AlgParSetHashLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.AlgParSetHashLabel.Location = new System.Drawing.Point(53, 51);
             this.AlgParSetHashLabel.Name = "AlgParSetHashLabel";
-            this.AlgParSetHashLabel.Size = new System.Drawing.Size(101, 25);
+            this.AlgParSetHashLabel.Size = new System.Drawing.Size(67, 15);
             this.AlgParSetHashLabel.TabIndex = 3;
             this.AlgParSetHashLabel.Text = "Hash name";
             // 
             // AlgParSetHashComboBox
             // 
             this.AlgParSetHashComboBox.FormattingEnabled = true;
-            this.AlgParSetHashComboBox.Location = new System.Drawing.Point(180, 80);
-            this.AlgParSetHashComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.AlgParSetHashComboBox.Location = new System.Drawing.Point(126, 48);
             this.AlgParSetHashComboBox.Name = "AlgParSetHashComboBox";
-            this.AlgParSetHashComboBox.Size = new System.Drawing.Size(194, 33);
+            this.AlgParSetHashComboBox.Size = new System.Drawing.Size(175, 23);
             this.AlgParSetHashComboBox.TabIndex = 4;
             // 
             // AlgParSetLenLabel
             // 
             this.AlgParSetLenLabel.AutoSize = true;
-            this.AlgParSetLenLabel.Location = new System.Drawing.Point(81, 37);
-            this.AlgParSetLenLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.AlgParSetLenLabel.Location = new System.Drawing.Point(57, 22);
             this.AlgParSetLenLabel.Name = "AlgParSetLenLabel";
-            this.AlgParSetLenLabel.Size = new System.Drawing.Size(95, 25);
+            this.AlgParSetLenLabel.Size = new System.Drawing.Size(63, 15);
             this.AlgParSetLenLabel.TabIndex = 3;
             this.AlgParSetLenLabel.Text = "Key length";
             // 
             // AlgParSetLenComboBox
             // 
             this.AlgParSetLenComboBox.FormattingEnabled = true;
-            this.AlgParSetLenComboBox.Location = new System.Drawing.Point(180, 32);
-            this.AlgParSetLenComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.AlgParSetLenComboBox.Location = new System.Drawing.Point(126, 19);
             this.AlgParSetLenComboBox.Name = "AlgParSetLenComboBox";
-            this.AlgParSetLenComboBox.Size = new System.Drawing.Size(194, 33);
+            this.AlgParSetLenComboBox.Size = new System.Drawing.Size(175, 23);
             this.AlgParSetLenComboBox.TabIndex = 4;
             this.AlgParSetLenComboBox.SelectedIndexChanged += new System.EventHandler(this.AlgParSetLenComboBox_SelectedIndexChanged);
             // 
             // DebugRichTextBox
             // 
-            this.DebugRichTextBox.Location = new System.Drawing.Point(404, 451);
+            this.DebugRichTextBox.Location = new System.Drawing.Point(9, 272);
+            this.DebugRichTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.DebugRichTextBox.Name = "DebugRichTextBox";
             this.DebugRichTextBox.ReadOnly = true;
-            this.DebugRichTextBox.Size = new System.Drawing.Size(361, 175);
+            this.DebugRichTextBox.Size = new System.Drawing.Size(764, 278);
             this.DebugRichTextBox.TabIndex = 3;
             this.DebugRichTextBox.Text = "";
             // 
             // CreateCertificateForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(778, 684);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.DebugRichTextBox);
             this.Controls.Add(this.AlgParSetGroupBox);
             this.Controls.Add(this.CreateButton);
             this.Controls.Add(this.UserInfoBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "CreateCertificateForm";
             this.Text = "Create Certificate";
             this.Load += new System.EventHandler(this.CreateCertificateForm_Load);
