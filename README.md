@@ -8,7 +8,7 @@ My diploma project in the last year of university. This program is a simplified 
 ### Main features:
 - Create/Verify GOST 34.10-2018 digital signature with key length of 256/512 bit 
 - Calculate GOST 34.11-2018 hash from any message (256/512 bit length)
-- Create self-signed X.509 certificate with Rosstandarn Elliptic Curve parameters
+- Create self-signed X.509 certificate with Rosstandart Elliptic Curve parameters
 - Create signed X.509 certificate with your information
 - Create and manage DB with valid and cancelled certificates and the users information
 
